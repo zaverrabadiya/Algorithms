@@ -16,7 +16,7 @@ public class Main {
         short result = 0;
         while (x != 0) {
             result ^= 1;
-            x &= x - 1;
+            x &= x - 1; //Drops the lowest set bit(1) of x
         }
         return result;
     }
