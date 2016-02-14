@@ -34,7 +34,7 @@ public class Multiplication {
             tempX >>= 1;
             tempY >>= 1;
         }
-        sum = sum | carryIn; 
+        sum = sum | carryIn;
         return sum;
     }
 }
