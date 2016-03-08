@@ -28,7 +28,7 @@ public class Main {
         Random gen = new Random();
         for (int i = 0; i < k; i++) {
             //Generate random int in A[i, A.size() - i]
-            int x = gen.nextInt(A.size() - i);
+            int x = i + gen.nextInt(A.size() - i);
             Collections.swap(A , i, x);
         }
     }
