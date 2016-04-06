@@ -29,8 +29,13 @@ public class Main {
             List<Integer> tempList = new ArrayList<Integer>();
             tempList.add(i);
             if (resultsSoFar.size() > 0) {
-                Iterator iterator = resultsSoFar.iterator();
 
+                int targetNeeds = k - i;
+                if (resultsSoFar.contains(targetNeeds)) {
+                    return true;
+                }
+
+                Iterator iterator = resultsSoFar.iterator();
                 while (iterator.hasNext()) {
                     int v = (Integer) iterator.next();
                     int sum  = i + v;
