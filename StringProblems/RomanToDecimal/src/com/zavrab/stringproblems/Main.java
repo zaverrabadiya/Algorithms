@@ -15,14 +15,13 @@ public class Main {
         System.out.println("Roman to Decimal: " + rtoi(roman));
     }
 
-
+    private static final HashMap<Character, Integer> rToIMap = prePopulateMap();
 
     static int rtoi(String strRoman) {
         if (strRoman == null || strRoman.isEmpty()) {
             return 0;
         }
         int number = 0;
-        HashMap<Character, Integer> rToIMap = prePopulateMap();
 
         for (int i = 0; i < strRoman.length(); i++) {
             int current = rToIMap.get(strRoman.charAt(i));
@@ -37,7 +36,8 @@ public class Main {
         }
         return number;
     }
-    static HashMap<Character, Integer> prePopulateMap() {
+    
+    private static HashMap<Character, Integer> prePopulateMap() {
         HashMap<Character, Integer> rToIMap = new HashMap<Character, Integer>();
         rToIMap.put('I', 1);
         rToIMap.put('V', 5);
@@ -48,6 +48,4 @@ public class Main {
         rToIMap.put('M', 1000);
         return rToIMap;
     }
-
-
 }
