@@ -21,44 +21,33 @@ public class Main {
 
     public static String sortCharacters(String inString) {
         String result = "";
-        List<Character>[] buckets = getBuckets(inString);
+        int[] buckets = new int[256];
+
+        for (int i = 0; i < inString.length(); i++) {
+            int ascii = inString.charAt(i);
+            ++buckets[ascii];
+        }
+
         result = getStringFromBuckets(buckets);
         return result;
     }
 
-    private static List<Character>[] getBuckets(String s) {
-        List<Character>[] buckets = new List[256];
-        List<Character> listOfChars;
-
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            int ascii = c;
-            listOfChars = buckets[ascii] !=null? buckets[ascii] : new ArrayList<Character>();
-            listOfChars.add(c);
-            buckets[ascii] = listOfChars;
-        }
-        return buckets;
-    }
-
-    private static String getStringFromBuckets(List<Character>[] buckets) {
+    private static String getStringFromBuckets(int[] buckets) {
         String result = "";
 
-        for (List<Character> characters : buckets) {
-            result += listOfCharsToString(characters);
+        for (int i = 0; i < buckets.length; i++) {
+            result += listOfCharsToString(i, buckets[i]);
         }
         return result;
     }
 
-    private static String listOfCharsToString(List<Character> listOfChars) {
+    private static String listOfCharsToString(int ascii, int numberOfCharacters) {
         String str = "";
-
-        if (listOfChars == null) {
-            return str;
-        }
-
-        for (char c : listOfChars) {
+        char c = (char) ascii;
+        for (int i = 0; i < numberOfCharacters; i++) {
             str += "" + c;
         }
+
         return str;
     }
 }
