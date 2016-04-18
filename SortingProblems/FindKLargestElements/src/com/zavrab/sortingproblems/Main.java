@@ -1,6 +1,5 @@
 package com.zavrab.sortingproblems;
 
-import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class Main {
@@ -15,11 +14,14 @@ public class Main {
     }
 
     public static int[] findKLargest(int[] arr, int topK) {
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>(topK, Collections.<Integer>reverseOrder());
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>(topK);
 
         int i = 0;
         while (i < arr.length) {
             priorityQueue.add(arr[i++]);
+            if (priorityQueue.size() > topK) {
+                priorityQueue.poll();
+            }
         }
 
         return convertPQToArray(priorityQueue, topK);
@@ -27,9 +29,9 @@ public class Main {
 
     private static int[] convertPQToArray(PriorityQueue<Integer> priorityQueue, int topK) {
         int[] output = new int[topK];
-        int i = 0;
-        while (priorityQueue.size() > 0 && i < topK) {
-            output[i++] = priorityQueue.poll();
+        int i = topK - 1;
+        while (priorityQueue.size() > 0 ) {
+            output[i--] = priorityQueue.poll();
         }
         return output;
     }
