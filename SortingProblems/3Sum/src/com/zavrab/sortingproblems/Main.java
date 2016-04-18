@@ -11,6 +11,7 @@ public class Main {
         // e.g.
         // Input = {-1, 0, 1, 2, -1, -4}
         // Output = {-1, 0, 1}, {-1, -1, 2}
+
         int[] input = {-1, 0, 1, 2, -1, -4};
 
         String[] triplets = findTriplets(input);
