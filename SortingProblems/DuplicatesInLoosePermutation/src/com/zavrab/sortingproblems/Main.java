@@ -21,11 +21,11 @@ public class Main {
         int i = 0;
         while (i < arr.length - 1) {
             if (arr[i] != i + 1) {
-                int elementBelongsToIdx = arr[i] - 1;
-                if (arr[i] == arr[elementBelongsToIdx]) { //Check if current element and the element at the curr element belongs are same
+                int actualIndexForThisElement = arr[i] - 1;
+                if (arr[i] == arr[actualIndexForThisElement]) { //Check if current element and the element at the curr element belongs are same
                     return arr[i]; //Found duplicate
                 } else {
-                    swap(arr, i, elementBelongsToIdx);
+                    swap(arr, i, actualIndexForThisElement);
                 }
             } else {
                 i++;
