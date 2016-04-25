@@ -3,7 +3,7 @@ package com.zavrab.sortingproblems;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
         int[] input = {5, 4, 0, 1, 3, 2};
         int[] result = MergeSort(input);
 
@@ -13,42 +13,38 @@ public class Main {
     }
 
     public static int[] MergeSort(int[] intArr) {
-        int[] sortedArray = new int[intArr.length];
-        sort(intArr, 0, intArr.length - 1, sortedArray);
-        return sortedArray;
+        sort(intArr, 0, intArr.length - 1);
+        return intArr;
     }
 
-    private static void sort(int[] arr, int s, int e, int[] result) {
+    private static void sort(int[] arr, int s, int e) {
         if (s < e) {
             int mid = s + ((e-s) / 2);
 
-            sort(arr, s, mid, result);
-            sort(arr, mid + 1, e, result);
-            merge(arr, s, mid, e, result);
+            sort(arr, s, mid);
+            sort(arr, mid + 1, e);
+            merge(arr, s, mid, e);
         }
     }
 
-    private static void merge(int[] arr, int s, int mid, int e, int[] result) {
-        int i = s, j = s, k = mid + 1;
+    private static void merge(int[] arr, int s, int mid, int e){
+        int[] mergedArr = new int[arr.length];
+        int j = s, k = mid + 1;
 
-        while (j <= mid && k <= e) {
-            if (arr[j] <= arr[k]) {
-                result[i++] = arr[j++];
+        for (int i = s; i <= e; i++) {
+            if (j <= mid && k > e) {
+                mergedArr[i] = arr[j++];
+            } else if (k <= e && j > mid) {
+                mergedArr[i] = arr[k++];
+            } else if (arr[j] < arr[k]) {
+                mergedArr[i] = arr[j++];
             } else {
-                result[i++] = arr[k++];
+                mergedArr[i] = arr[k++];
             }
         }
 
-        while (j <= mid) {
-            result[i++] = arr[j++];
-        }
-
-        while (k <= e) {
-            result[i++] = arr[k++];
-        }
-
-        for (int l = 0; l <= e; l++) {
-            arr[l] = result[l];
+        for (int l = s; l <= e; l++) {
+            arr[l] = mergedArr[l];
         }
     }
 }

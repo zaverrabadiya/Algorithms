@@ -16,7 +16,7 @@ public class Main {
         char[] T = text.toCharArray();
         char [] P = pattern.toCharArray();
         int j = 0, m = pattern.length(), n = text.length();
-        int[] overlap = kmpOverlapComputation(P);
+        int[] prefix = kmpOverlapComputation(P);
 
         for (int i = 0; i < n; i++) {
             while (true) {
@@ -24,13 +24,13 @@ public class Main {
                     j++;
                     if (j == m) {
                         matchFound = true;
-                        j = overlap[j]; //Can break here and check the flag outside inner loop, if looking for first match only
+                        j = prefix[j]; //Can break here and check the flag outside inner loop, if looking for first match only
                     }
                     break;
                 } else if (j == 0) {
                     break;
                 } else {
-                    j = overlap[j];
+                    j = prefix[j];
                 }
             }
         }
