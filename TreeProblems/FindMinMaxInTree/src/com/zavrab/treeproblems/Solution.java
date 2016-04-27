@@ -57,26 +57,4 @@ public class Solution {
 
         return max;
     }
-
-    public boolean isBst(Node root, int low, int high) {
-        if (root == null) {
-            return true;
-        }
-
-        int min = low, max  = high;
-        if (root.left != null) {
-            min = Math.min(root.left.val, root.val);
-            max = Math.max(root.left.val, root.val);
-        }
-
-        if (root.right != null) {
-            min = Math.min(root.right.val, root.val);
-            max = Math.max(root.left.val, root.val);
-        }
-
-        if (low < root.val && high > root.val) {
-
-            return isBst(root.left, low, )
-        }
-    }
 }

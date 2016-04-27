@@ -16,7 +16,5 @@ public class Main {
         System.out.println("Min is: " + solution.findMin(root));
 
         System.out.println("Max is: " + solution.findMax(root));
-
-        System.out.println("Is BST: " + solution.isBst(root, Integer.MAX_VALUE, Integer.MIN_VALUE));
     }
 }
