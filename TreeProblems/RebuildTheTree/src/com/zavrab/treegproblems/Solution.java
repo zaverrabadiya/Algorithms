@@ -15,7 +15,7 @@ public class Solution {
         // 50
         // 30 70
         // 10 40 60 90
-        
+
         int[] inOrder = {10, 30, 40, 50, 60, 70, 90};
         int[] preOrder = {50, 30, 10, 40, 70, 60, 90};
 
