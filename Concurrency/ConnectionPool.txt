@@ -1,0 +1,40 @@
+ConnectionPool {
+	Mutex lock;
+	ConcurrentLinkedList<Connection> pool;
+	int count = 0;
+	CV available;
+}
+
+initialize(max) {
+	
+	maxSize = max;
+	pool = new ConcurrentLinkedList<Connection>();
+
+	for (int i = 0; i < max; i++) {
+		pool.add(new Connection());
+	}
+	count = max;
+}
+
+getConnection() {
+	lock.enter();
+
+	while(count == 0) {
+		wait(available);
+	}
+
+	Connection connection = pool.deque();
+	--count;
+
+	lock.leave();
+}
+
+returnConnection(Connection connection) {
+	lock.enter();
+
+	pool.enque(connection);
+	++count;
+	signal(available);
+
+	lock.leave();
+}
