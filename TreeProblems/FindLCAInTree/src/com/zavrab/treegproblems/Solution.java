@@ -24,7 +24,8 @@ public class Solution {
     }
 
     public static Node findLCAInTree(Node root, Node n1, Node n2) {
-        if (root == null || (n1Found && n2Found)) {
+        if (root == null || (n1Found && n2Found)) { // Checking global variables just to break the recursion when both node found
+                                                    // else it would traverse though entire tree even when nodes are found. NO DIFFERENCE IN RESULT
             return null;
         }
 
