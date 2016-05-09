@@ -1,8 +1,5 @@
 package com.zavrab.arrayproblems;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Solution {
 
     public static void main(String[] args) {
@@ -18,9 +15,8 @@ public class Solution {
         printMatrixInSpiral(matrix, n, m);
     }
 
-    public static List<Integer> printMatrixInSpiral(int[][] matrix, int n, int m) {
+    public static void printMatrixInSpiral(int[][] matrix, int n, int m) {
         int border = 0, i, j;
-        List<Integer> result = new ArrayList<Integer>();
 
         while (border < (n - border) || border < (m - border)) {
             i = border;
@@ -46,6 +42,5 @@ public class Solution {
 
             border++;
         }
-        return result;
     }
 }
