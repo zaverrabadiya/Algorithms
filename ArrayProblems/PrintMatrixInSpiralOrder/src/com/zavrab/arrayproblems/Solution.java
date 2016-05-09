@@ -22,17 +22,15 @@ public class Solution {
             i = border;
             j = border;
 
-            for (;j < (m - border); j++) {
+            for (;j < ((m - 1) - border); j++) {
                 System.out.print(matrix[i][j] + " ");
             }
-            j--; // Decrease since j went out of bound
 
-            for (i = i + 1; i < (n - border); i++) { // Start from the next row
+            for (; i < ((n - 1) - border); i++) {
                 System.out.print(matrix[i][j] + " ");
             }
-            i--; //Decrease since i went out of bound
 
-            for (j = j - 1; j > border; j--) { // Start from prev col
+            for (; j > border; j--) {
                 System.out.print(matrix[i][j] + " ");
             }
 
