@@ -1,30 +1,53 @@
 package com.zavrab.treeproblems;
 
+import java.util.Stack;
+
 public class Solution {
     private static int k;
 
     public static void main(String[] args) {
 	    Node root = createTree();
         k = 2;
-        printTopKSmallestElements(root);
+       // printTopKSmallestElements(root);
+        printTopKSmallestElementsIteratively(root, 2);
     }
 
+    // RECURSIVELY
     public static void printTopKSmallestElements(Node root) {
         if (k == 0 || root == null) {
             return;
         }
 
+        printTopKSmallestElements(root.left);
 
+        if (k > 0) {
+            System.out.println(root.val);
+            --k;
 
-            printTopKSmallestElements(root.left);
+            printTopKSmallestElements(root.right);
+        }
+    }
 
-            if (k > 0) {
-                System.out.println(root.val);
-                --k;
+    // ITERATIVELY
+    public static void printTopKSmallestElementsIteratively(Node root, int k) {
+        if (k == 0) {
+            return;
+        }
 
-                printTopKSmallestElements(root.right);
+        Stack<Node> visitedNodes = new Stack<Node>();
+        Node curr = root;
+
+        while ((visitedNodes.size() > 0 || curr != null) && k > 0) {
+            if (curr != null) {
+                visitedNodes.push(curr);
+                curr = curr.left;
+            } else {
+                curr = visitedNodes.pop();
+                System.out.print(curr.val + " ");
+                k--;
+                curr = curr.right;
             }
-
+        }
     }
 
     private static Node createTree() {
