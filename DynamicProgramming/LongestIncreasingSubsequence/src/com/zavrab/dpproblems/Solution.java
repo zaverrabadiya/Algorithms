@@ -8,10 +8,11 @@ public class Solution {
 
         int[] input = {-7, 10, 9, 2, 3, 8, 8, 1};
         //int[] input = {1, 10, 9, 2, 3, 4, 5};
-        int length = lisWithCache(input);
+        int length = lisWithCacheIteratively(input);
         System.out.print("Longest increasing subsequence length: " + length);
     }
 
+    // Recursive
     public static int findLongestIncreasingSubsequence(int[] intArr) {
         int max = 1;
         for (int i = 0; i < intArr.length; i++) {
@@ -36,6 +37,7 @@ public class Solution {
         return max + 1;
     }
 
+    // Recursive with Memoization
     public static int lisWithCache(int[] intArr) {
         int max = 1;
         int[] cache = new int[intArr.length];
@@ -64,5 +66,27 @@ public class Solution {
             cache[start] = max;
         }
         return max + 1;
+    }
+
+    // Iteratively with Memoization
+    public static int lisWithCacheIteratively(int[] intArr) {
+        int[] cache = new int[intArr.length];
+        int max;
+
+        for (int i = intArr.length -1; i >=0; i--) {
+            max = 0;
+            for (int j = i + 1; j < intArr.length; j++) {
+                if (intArr[i] < intArr[j] && cache[j] > max) {
+                    max = cache[j];
+                }
+            }
+            cache[i] = max + 1;
+        }
+
+        max = 0;
+        for (int m : cache) {
+            max = Math.max(m, max);
+        }
+        return max;
     }
 }
