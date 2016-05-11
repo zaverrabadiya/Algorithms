@@ -16,11 +16,15 @@ public class Main {
     public static int[] findKLargest(int[] arr, int topK) {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>(topK);
 
-        int i = 0;
+        int i = 1;
+        priorityQueue.add(arr[0]);
         while (i < arr.length) {
-            priorityQueue.add(arr[i++]);
-            if (priorityQueue.size() > topK) {
-                priorityQueue.poll();
+            if (arr[i++] > priorityQueue.peek()) {
+                priorityQueue.add(arr[i]);
+
+                if (priorityQueue.size() > topK) {
+                    priorityQueue.poll();
+                }
             }
         }
 

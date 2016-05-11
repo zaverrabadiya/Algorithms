@@ -1,6 +1,5 @@
 package com.zavrab.sortingproblems;
 
-import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class Main {
@@ -8,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 	    int[][] input = {
                 {2, 5, 8, 9},
-                {0, 10, 6, 11},
+                {0, 6, 10, 11},
                 {1, 3, 4, 7}
         };
 
@@ -19,22 +18,25 @@ public class Main {
         }
     }
 
-    public static int[] merge(int[][] arr, int n, int k) {
-        PriorityQueue priorityQueue = new PriorityQueue(n * k);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < k; j++) {
-                priorityQueue.add(arr[i][j]);
-            }
-        }
-        return convertPQToArray(priorityQueue);
-    }
+    public static int[] merge(int[][] arr, int k, int n) {
+        int[] output = new int[k * n];
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>(k);
+        int s = 0;
 
-    private static int[] convertPQToArray(PriorityQueue<Integer> priorityQueue) {
-        int[] arr = new int[priorityQueue.size()];
-        int i = 0;
-        while (priorityQueue.size() > 0) {
-            arr[i++] = priorityQueue.poll();
+        int min;
+        for (int i = 0; i < n; i++) { //Pick ith elements in each array, since they are sorted
+            for (int j = 0; j < k; j++) {
+                priorityQueue.add(arr[j][i]);
+            }
+            min = priorityQueue.poll();
+            output[s++] = min;
         }
-        return arr;
+
+        while (priorityQueue.size() > 0) {
+            min = priorityQueue.poll();
+            output[s++] = min;
+        }
+
+        return output;
     }
 }

@@ -18,13 +18,20 @@ public class Main {
     public static Point[] findNearestPoints(Point[] allPoints, Point point, int kPoint) {
         PriorityQueue<Point> queueByDistance = new PriorityQueue<Point>(kPoint, Collections.reverseOrder());
 
+        Point fakePoint = new Main().new Point(Integer.MAX_VALUE, Integer.MAX_VALUE); //Adding fake, so first .peek() won't throw exception
+        fakePoint.setDistance(Integer.MAX_VALUE);
+        queueByDistance.add(fakePoint);
+
         for (int i = 0; i < allPoints.length; i++) {
             double distance = euclideanDistance(point, allPoints[i]);
             allPoints[i].setDistance(distance);
-            queueByDistance.add(allPoints[i]);
 
-            if (queueByDistance.size() > kPoint) {
-                queueByDistance.poll();
+            if (allPoints[i].distance <  queueByDistance.peek().distance) {
+                queueByDistance.add(allPoints[i]);
+
+                if (queueByDistance.size() > kPoint) {
+                    queueByDistance.poll();
+                }
             }
         }
         return getTopKPointsFromPQ(kPoint, queueByDistance);
