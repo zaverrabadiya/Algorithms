@@ -6,9 +6,9 @@ public class Main {
 
     public static void main(String[] args)
     {
-        // Nuts and bolts are represented as array of characters
-        int[] nuts = new int[] {2, 3, 5, 4, 1};
-        int[] bolts = new int[] {4, 5, 2, 1, 3};
+        // Nuts and bolts are represented as array of characters, NO DUPLICATES
+        int[] nuts = new int[] {2, 5, 3, 4, 1};
+        int[] bolts = new int[] {5, 3, 2, 1, 4};
 
         // Method based on quick sort which matches nuts and bolts
         matchPairs(nuts, bolts, 0, 4);
@@ -37,7 +37,7 @@ public class Main {
 
             // Now using the partition of nuts choose that for bolts
             // partition.
-            partition(bolts, low, high, nuts[pivot]);
+            partition(bolts, low, high, bolts[high]);
 
             // Recur for [low...pivot-1] & [pivot+1...high] for nuts and
             // bolts array.
@@ -51,27 +51,25 @@ public class Main {
     private static int partition(int[] arr, int low, int high, int pivot)
     {
         int i = low;
-        int temp1, temp2;
         for (int j = low; j < high; j++)
         {
             if (arr[j] < pivot){
-                temp1 = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp1;
+                swap(arr, i, j);
                 i++;
-            } else if(arr[j] == pivot){
-                temp1 = arr[j];
-                arr[j] = arr[high];
-                arr[high] = temp1;
+            } else if (arr[j] == pivot){
+                swap(arr, j, high);
                 j--;
             }
         }
-        temp2 = arr[i];
-        arr[i] = arr[high];
-        arr[high] = temp2;
-
+        swap(arr, i, high);
         // Return the partition index of an array based on the pivot
         // element of other array.
         return i;
+    }
+
+    private static void swap(int[] arr, int s, int d) {
+        int temp = arr[s];
+        arr[s] = arr[d];
+        arr[d] = temp;
     }
 }
