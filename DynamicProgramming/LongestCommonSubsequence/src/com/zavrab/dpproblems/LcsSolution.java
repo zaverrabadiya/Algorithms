@@ -9,24 +9,24 @@ public class LcsSolution {
         // "ABCDGH", "AEDFHR" => "ADH"
         // "AGGTAB", "GXTXAYB" => "GTAB"
 
-        String x = "AGGTAB", y = "GXTXAYB";
+        String x = "ABCDGH", y = "AEDFHR";
 
-        System.out.print("LCS: " + findLcs(x, y));
-        //System.out.print("LCS length: " + findLcsLengthIteratively(x, y));
-        //System.out.print("LCS length:" + findLcsLengthRecursively(x, y));
-        //System.out.print("LCS :" + findLcsNaive(x, y));
+        System.out.print("LCS: " + getLcs(x, y));
+        //System.out.print("LCS length: " + getLcsLengthIteratively(x, y));
+        //System.out.print("LCS length:" + getLcsLengthRecursively(x, y));
+        //System.out.print("LCS :" + getLcsNaive(x, y));
     }
 
-    //Finc LCS ITERATIVELY with CACHE:
-    public static String findLcs(String strX, String strY) {
+    //Finc LCS ITERATIVELY with CACHE: O(nm)
+    public static String getLcs(String strX, String strY) {
         int n = strX.length(), m = strY.length();
         int[][] cache = buildLcsMemoization(strX, strY, n, m);
         String result = "";
-        int i = n-1, j = m-1;
+        int i = n, j = m;
 
-        while (i >= 0 && j >= 0) {
-            if (strX.charAt(i) == strY.charAt(j)) {
-                result = strX.charAt(i) + result;
+        while (i > 0 && j > 0) {
+            if (strX.charAt(i-1) == strY.charAt(j-1)) {
+                result = strX.charAt(i-1) + result;
                 i--;
                 j--;
             } else if (cache[i - 1][j] > cache[i][j - 1]) {
@@ -39,26 +39,20 @@ public class LcsSolution {
     }
 
     // Find LCS LENGTH Iteratively with cache: T(O) = O(nm)
-    public static int findLcsLengthIteratively(String strX, String strY) {
+    public static int getLcsLengthIteratively(String strX, String strY) {
         int n = strX.length(), m = strY.length();
         int[][] cache = buildLcsMemoization(strX, strY, n, m);
-        return cache[n-1][m-1];
+        return cache[n][m];
     }
 
     private static int[][] buildLcsMemoization(String strX, String strY, int n, int m) {
-        int[][] cache = new int[n][m];
+        int[][] cache = new int[n+1][m+1];
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= m; j++) {
                 if (i == 0 || j == 0) {
-                    if (strX.charAt(i) == strY.charAt(j)) {
-                        cache[i][j] = 1;
-                    } else if (i > 0){
-                        cache[i][j] = cache[i - 1][j];
-                    } else {
-                        cache[i][j] = 0;
-                    }
-                } else if (strX.charAt(i) == strY.charAt(j)) {
+                    cache[i][j] = 0;
+                } else if (strX.charAt(i-1) == strY.charAt(j-1)) {
                     cache[i][j] = cache[i-1][j-1] + 1;
                 } else {
                     cache[i][j] = Math.max(cache[i-1][j], cache[i][j-1]);
@@ -69,11 +63,11 @@ public class LcsSolution {
     }
 
     // Find LCS LENGTH Recursively: T(O) = 2^n
-    public static int findLcsLengthRecursively(String strX, String strY) {
-        return findLcsLengthRecursivelyInternal(strX, strY);
+    public static int getLcsLengthRecursively(String strX, String strY) {
+        return getLcsLengthRecursivelyInternal(strX, strY);
     }
 
-    private static int findLcsLengthRecursivelyInternal(String strX, String strY) {
+    private static int getLcsLengthRecursivelyInternal(String strX, String strY) {
         if (strX.length() == 0 || strY.length() == 0) {
             return 0;
         }
@@ -81,16 +75,16 @@ public class LcsSolution {
         int n = strX.length(), m = strY.length();
 
         if (strX.charAt(n - 1) == strY.charAt(m - 1)) {
-            return 1 + findLcsLengthRecursivelyInternal(strX.substring(0, n - 1), strY.substring(0, m - 1));
+            return 1 + getLcsLengthRecursivelyInternal(strX.substring(0, n - 1), strY.substring(0, m - 1));
         } else {
-            int maxX = findLcsLengthRecursivelyInternal(strX.substring(0, n - 1), strY);
-            int maxY = findLcsLengthRecursivelyInternal(strX, strY.substring(0, m - 1));
+            int maxX = getLcsLengthRecursivelyInternal(strX.substring(0, n - 1), strY);
+            int maxY = getLcsLengthRecursivelyInternal(strX, strY.substring(0, m - 1));
             return Math.max(maxX, maxY);
         }
     }
 
     // Find Longest Common Subsequence : NAIVE but 2^N
-    public static String findLcsNaive(String strX, String strY) {
+    public static String getLcsNaive(String strX, String strY) {
         HashSet<String> setX = new HashSet<String>();
         HashSet<String> setY = new HashSet<String>();
         findSubsequence(strX, 0, setX, "");
