@@ -46,7 +46,7 @@ public class LcsSolution {
     }
 
     private static int[][] buildLcsMemoization(String strX, String strY, int n, int m) {
-        int[][] cache = new int[n+1][m+1];
+        int[][] cache = new int[n+1][m+1]; // Increasing length to + 1, so row 0 and col 0 can be left as it is
 
         for (int i = 1; i <= n; i++) { // Starting from 1, so i -1 and j -1 comparison won't go out of bound
             for (int j = 1; j <= m; j++) {
