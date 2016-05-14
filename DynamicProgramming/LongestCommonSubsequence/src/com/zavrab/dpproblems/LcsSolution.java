@@ -9,7 +9,7 @@ public class LcsSolution {
         // "ABCDGH", "AEDFHR" => "ADH"
         // "AGGTAB", "GXTXAYB" => "GTAB"
 
-        String x = "ABCDGH", y = "AEDFHR";
+        String x = "AGGTAB", y = "GXTXAYB";
 
         System.out.print("LCS: " + getLcs(x, y));
         //System.out.print("LCS length: " + getLcsLengthIteratively(x, y));
@@ -48,11 +48,9 @@ public class LcsSolution {
     private static int[][] buildLcsMemoization(String strX, String strY, int n, int m) {
         int[][] cache = new int[n+1][m+1];
 
-        for (int i = 0; i <= n; i++) {
-            for (int j = 0; j <= m; j++) {
-                if (i == 0 || j == 0) {
-                    cache[i][j] = 0;
-                } else if (strX.charAt(i-1) == strY.charAt(j-1)) {
+        for (int i = 1; i <= n; i++) { // Starting from 1, so i -1 and j -1 comparison won't go out of bound
+            for (int j = 1; j <= m; j++) {
+               if (strX.charAt(i-1) == strY.charAt(j-1)) {
                     cache[i][j] = cache[i-1][j-1] + 1;
                 } else {
                     cache[i][j] = Math.max(cache[i-1][j], cache[i][j-1]);
