@@ -2,6 +2,11 @@ package com.zavrab.recurssionproblems;
 
 public class Main {
 
+    // e.g.
+    // 1 => ()
+    // 2 => (())  ()()   
+    // 3 => ((()))  (()())  (())()  ()(())  ()()()
+    
     public static void main(String[] args) {
         brackets(3);
     }
@@ -10,17 +15,18 @@ public class Main {
         brackets(" ", 0, 0, n);
     }
 
-    private static void brackets(String output, int l, int r, int n) {
-        if (l == n && r == n) {
+    private static void brackets(String output, int leftCount, int rightCount, int n) {
+        if (leftCount == n && rightCount == n) {
             System.out.print(output);
             return;
         }
 
-        if (l < n) {
-            brackets(output + "(", l + 1, r, n);
+        if (leftCount < n) { // Append opening brackets
+            brackets(output + "(", leftCount + 1, rightCount, n);
         }
-        if (r < l ) {
-            brackets(output + ")", l, r + 1, n);
+
+        if (rightCount < leftCount) { // Append closing brackets
+            brackets(output + ")", leftCount, rightCount + 1, n);
         }
     }
 }
