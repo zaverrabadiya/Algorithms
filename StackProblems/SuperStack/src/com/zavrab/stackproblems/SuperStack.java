@@ -25,7 +25,8 @@ public class SuperStack {
     * pop()     [4, 6]
     * */
 
-    private static List<Integer> list = new ArrayList<Integer>(); // List backed stack
+    private static Stack<Integer> stack = new Stack<Integer>();
+    private static List<Integer> list = new ArrayList<Integer>(); // USING LIST FOR REFERENCE
 
     public static void main(String[] args) {
         push(4);
@@ -44,16 +45,24 @@ public class SuperStack {
 
     public static void push(int val) {
         list.add(val);
-        System.out.println(list.get(list.size() - 1));
+        int referenceIdx = list.size() - 1;
+        stack.push(referenceIdx);
+
+        System.out.println(list.get(stack.peek()));
     }
 
     public static void pop() {
-        list.remove(list.size() - 1);
-
-        if (list.size() == 0) {
+        if (stack.isEmpty()) {
             System.out.println("EMPTY");
         } else {
-            System.out.println(list.get(list.size() - 1));
+            int topRef = stack.pop();
+            list.remove(topRef);
+
+            if (stack.isEmpty()) {
+                System.out.println("EMPTY");
+            } else {
+                System.out.println(list.get(stack.peek()));
+            }
         }
     }
 
@@ -63,6 +72,6 @@ public class SuperStack {
             list.set(i, curr + d);
         }
 
-        System.out.println(list.get(list.size() - 1));
+        System.out.println(list.get(stack.peek()));
     }
 }
