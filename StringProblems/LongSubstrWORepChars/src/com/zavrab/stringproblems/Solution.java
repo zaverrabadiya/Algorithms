@@ -8,6 +8,7 @@ public class Solution {
         System.out.println(longestSubstringWithoutRepeatingCharacters("pwwke"));
         System.out.println(longestSubstringWithoutRepeatingCharacters("pwwkew"));
         System.out.println(longestSubstringWithoutRepeatingCharacters("abcadefb"));
+        System.out.println(longestSubstringWithoutRepeatingCharacters("abcABC"));
     }
 
     public static String longestSubstringWithoutRepeatingCharacters(String inStr) {
