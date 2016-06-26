@@ -5,52 +5,57 @@ public class Main {
     public static void main(String[] args) {
 
         String inStr = "Google worked";
-        //String inStr = "Hello world!";
+        System.out.println("String sinusoidally with rows 3\n");
+        printStringSinusoidally(inStr);
+
+        System.out.println("\nString sinusoidally with rows 4 \n");
+        inStr = "abcde fghi jklmno pqrst";
+        printStringSinusoidally(inStr);
+
+        System.out.println("\nString sinusoidally with rows 5");
+        inStr = "abcde fghi jklmno pqrstu v wxy z";
         printStringSinusoidally(inStr);
     }
 
     public static void printStringSinusoidally(String s) {
-        if (s == null || s.length() < 3) {
-            return;
-        }
+        int rows = findNumberOfRows(s);
+        int totalSpaces = ((rows - 1) * 2) - 1;
+        int prevSpaces = totalSpaces;
 
-        int spaceCount = 2, startPos = (s.length() % 2 + 1), i = startPos;
-        while (i < s.length()) {
-            for (int j = 1; j <= spaceCount; j++) {
+        for (int row = 0; row < rows; row++) {
+            //Initial spaces
+            for (int j = 0; j < row; j++) {
                 System.out.print(" ");
             }
-            char c = s.charAt(i) == ' ' ? '~' : s.charAt(i);
-            System.out.print(c);
-            spaceCount = 3;
-            i += 4;
-        }
-        System.out.println();
 
-        i = --startPos;
-        spaceCount = 1;
-        while (i < s.length()) {
-            for (int j = 1; j <= spaceCount; j++) {
-                System.out.print(" ");
+            int spaces = totalSpaces;
+            if (prevSpaces > 0){
+                spaces = prevSpaces;
+                prevSpaces -= 2;
             }
-            char c = s.charAt(i) == ' ' ? '~' : s.charAt(i);
-            System.out.print(c);
-            i += 2;
-        }
-        System.out.println();
 
-        i = --startPos;
-        spaceCount = 0;
-        while (i < s.length()) {
-            for (int j = 1; j <= spaceCount; j++) {
-                System.out.print(" ");
+            int i = row;
+            while (i < s.length()) {
+                char c = s.charAt(i) == ' ' ? '~' : s.charAt(i);
+                System.out.print(c);
+
+                for (int j = 0; j < spaces; j++) {
+                    System.out.print(" ");
+                }
+
+                i += spaces + 1;
+                if (spaces != totalSpaces) {
+                    spaces = (totalSpaces - spaces) - 1;
+                }
             }
-            char c = ' ';
-            if (i >= 0) {
-                c = s.charAt(i) == ' ' ? '~' : s.charAt(i);
-            }
-            System.out.print(c);
-            spaceCount = 3;
-            i += 4;
+            System.out.println();
         }
+    }
+
+    private static int findNumberOfRows(String s) {
+        int i = 0;
+        while ((++i * i) <= s.length());
+
+        return i - 1;
     }
 }
