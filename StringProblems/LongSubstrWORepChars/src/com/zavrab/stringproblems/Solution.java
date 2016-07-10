@@ -19,7 +19,7 @@ public class Solution {
             char currChar = Character.toLowerCase(inStr.charAt(i));
             int prevIndx = members[currChar];
 
-            if (prevIndx == -1 || (i - currChar) > prevIndx) {
+            if (prevIndx == -1 || (i - currLength) > prevIndx) {
                 currLength++;
             } else {
                 if (currLength > maxLength) {

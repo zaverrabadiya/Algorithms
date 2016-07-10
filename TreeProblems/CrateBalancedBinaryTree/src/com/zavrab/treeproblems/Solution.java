@@ -5,8 +5,6 @@ import java.util.List;
 
 public class Solution {
 
-    private static int preIdx = 0;
-
     public static void main(String[] args) {
         // e.g.
         // {10, 30, 40, 50, 60, 70, 90}
@@ -38,7 +36,7 @@ public class Solution {
         }
 
         int mid = start + (end - start) /2;
-        Node node = new Solution().new Node(intArr[mid]);
+        Node node = new Node(intArr[mid]);
 
         node.left = createBalancedBST(intArr, start, mid - 1);
         node.right = createBalancedBST(intArr, mid + 1, end);
@@ -76,7 +74,7 @@ public class Solution {
         traverseBFS(queue);
     }
 
-    private class Node {
+    private static class Node {
         int val;
         Node left;
         Node right;
