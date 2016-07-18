@@ -31,7 +31,7 @@ public class Main {
         knightTourPathInternal(src, dest);
 
         if (shortestPath.size() > 0) {
-            System.out.format("Shortes path for knight tour from {%d,%d} to {%d,%d} is:\n", x1, y1, x2, y2);
+            System.out.format("Shortest path for knight tour from {%d,%d} to {%d,%d} is:\n", x1, y1, x2, y2);
             for (Integer v : shortestPath) {
                 int[] coordinates = Graph.nodeIdToCoordinates(v, boardSize);
                 System.out.format("{%d,%d} ", coordinates[0], coordinates[1]);
@@ -42,26 +42,28 @@ public class Main {
     private static void knightTourPathInternal(int node, int dest) {
         path.add(node);
 
-        if (node != dest && !visited[node]) {
+        if (node == dest){
+            if (shortestPath == null || path.size() < shortestPath.size()) {
+                shortestPath = new ArrayList<Integer>(path);
+            }
+            return;
+        }
+
+        if (!visited[node]) {
             visited[node] = true;
             List<Integer> neighbors = edges.get(node);
-            int i = 0;
 
-            while (i < neighbors.size()) {
+            for (int i = 0; i < neighbors.size(); i++) {
                 if (!visited[neighbors.get(i)]) {
+
                     knightTourPathInternal(neighbors.get(i), dest);
 
+                    // Remove last node when backtracking
                     if (path.size() > 0) {
                         path.remove(path.size() - 1);
                     }
                 }
-                i++;
             }
-        } else if (node == dest){
-            if (shortestPath == null || path.size() < shortestPath.size()) {
-                shortestPath = new ArrayList<Integer>(path);
-            }
-            visited[node] = false;
         }
     }
 }
