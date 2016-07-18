@@ -18,6 +18,9 @@ public class Main {
         Graph graph = new Graph();
         edges = graph.createGraph(boardSize);
 
+        // Knight tour shortest path call
+        // Input Source cell: x1, y1 and  Destination cell: x2, y2
+        // i.e. source: 0, 0 and destination: 2, 4
         knightTourPath(0, 0, 2, 4, boardSize);
     }
 
