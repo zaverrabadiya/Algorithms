@@ -18,6 +18,10 @@ public class MaxSubMatrix {
     }
 
     public static int maxSubMatrix(int[][] mtx) {
+        if  (mtx == null || mtx.length == 0){
+            return 0;
+        }
+
         int r = mtx.length;
         int c = mtx[0].length;
         int[][] s = new int[r][c];
@@ -40,8 +44,8 @@ public class MaxSubMatrix {
 
         int max = 0, maxI = 0, maxJ = 0;
 
-        for (int i = 1; i < r; i++) {
-            for (int j = 1; j < c; j++) {
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
                 if (s[i][j] > max) {
                     max = s[i][j];
                     maxI = i;
