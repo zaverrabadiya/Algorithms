@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * Created by ZaverR on 7/29/16.
+ *
+ * Total phone number formed using Knight tour constraint
  */
 public class Solution {
 
