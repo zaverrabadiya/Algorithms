@@ -1,12 +1,27 @@
 package com.zavrab.dpproblems;
 
+/**
+ * http://codercareer.blogspot.com/2013/02/no-44-maximal-stolen-values.html
+ *
+ * Problem: There are n houses built in a line, each of which contains some value in it.
+ * A thief is going to steal the maximal value in these houses,
+ * but he cannot steal in two adjacent houses because the owner of a stolen house will tell his two neighbors on the left and right side.
+ * What is the maximal stolen value?
+ * */
 public class HouseRobberySolution {
 
     public static void main(String[] args) {
-        int[] houseValues = new int[] {6, 1, 2, 7, 1};
-        //int[] houseValues = new int[] {1,2,3,4,5};
+        int[] houseValues = new int[] {6, 1, 2, 7, 1}; // Output: 13
+        System.out.println("Maximal robbery: " + maxStolenValue(houseValues));
 
-        System.out.print("Maximal robbery: " + maxStolenValue(houseValues));
+        int[] houseValues2 = new int[] {1, 2, 3, 4, 5}; // Output: 9
+        System.out.println("Maximal robbery: " + maxStolenValue(houseValues2));
+
+        int[] houseValues3 = new int[] {10, 2, 3, 4, 5, 6}; // Output: 20
+        System.out.println("Maximal robbery: " + maxStolenValue(houseValues3));
+
+        int[] houseValues4 = new int[] {10, 2, 3, 4, 20, 6}; // Output: 33
+        System.out.println("Maximal robbery: " + maxStolenValue(houseValues4));
     }
 
     public static int maxStolenValue(int[] arrHouseValues) {
@@ -14,17 +29,7 @@ public class HouseRobberySolution {
         return maxStolen(arrHouseValues);
     }
 
-    private static int maxStolenValueInternal(int[] houseValues, int start) {
-        if (start >= houseValues.length) {
-            return 0;
-        }
-
-        int first = houseValues[start] + maxStolenValueInternal(houseValues, start + 2);
-        int second = maxStolenValueInternal(houseValues, start + 1);
-
-        return Math.max(first, second);
-    }
-
+    // DP solution
     private static int maxStolen(int[] houseValues) {
         if (houseValues.length == 0) {
             return 0;
@@ -49,5 +54,17 @@ public class HouseRobberySolution {
         }
 
         return value;
+    }
+
+    // RECURSIVE
+    private static int maxStolenValueInternal(int[] houseValues, int start) {
+        if (start >= houseValues.length) {
+            return 0;
+        }
+
+        int first = houseValues[start] + maxStolenValueInternal(houseValues, start + 2);
+        int second = maxStolenValueInternal(houseValues, start + 1);
+
+        return Math.max(first, second);
     }
 }
