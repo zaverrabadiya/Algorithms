@@ -3,6 +3,8 @@ package com.zavrab.dpproblems;
 import java.util.ArrayList;
 import java.util.List;
 
+// http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/
+
 public class BalancedPartitionSolution {
 
     public static void main(String[] args) {
