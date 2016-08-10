@@ -2,7 +2,6 @@ package com.zavrab.recursionproblems;
 
 import java.util.Stack;
 
-// http://www.cs.cmu.edu/~cburch/survey/recurse/hanoiimpl.html
 /**
  * A Tower of Hanoi is a game that consists of three rods,
  * and a number of disks of different sizes which can slide onto any rod.
@@ -10,10 +9,11 @@ import java.util.Stack;
  * the smallest at the top. The objective of the puzzle is to move the entire stack to another rod,
  * obeying the following simple rules:
  *
- * 1. Only one disk can be more at a time.
+ * 1. Only one disk can be moved at a time.
  * 2. Each one consists of taking the upper disk from one of the stacks and placing it on top of another stack i.e. a disk can only be moved if it is the uppermost disk on a stack.
  * 3. No disk may be place on top of a smaller disk.
  *
+ * http://www.cs.cmu.edu/~cburch/survey/recurse/hanoiimpl.html
  * */
 public class TowerOfHanoiSolution {
 
