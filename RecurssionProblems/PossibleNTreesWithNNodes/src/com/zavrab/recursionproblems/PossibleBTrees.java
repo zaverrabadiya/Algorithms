@@ -24,16 +24,15 @@ public class PossibleBTrees {
         if (nodes <= 1) {
             return 1;
         }
-        else {
-            int left, right, sum = 0;
 
-            for (int i = 1; i <= nodes; i++) {
-                left = countTrees(i - 1);
-                right = countTrees(nodes - i);
-                sum += (left * right);
-            }
+        int left, right, sum = 0;
 
-            return sum;
+        for (int i = 1; i <= nodes; i++) {
+            left = countTrees(i - 1); // Assign i-1 nodes to left, (i - 1) because one for root
+            right = countTrees(nodes - i); // Assign nodes - i: total nodes - nodes assigned to left and root
+            sum += (left * right); // (left * right) because left subtree and right subtree constitutes only 1 tree
         }
+
+        return sum;
     }
 }
