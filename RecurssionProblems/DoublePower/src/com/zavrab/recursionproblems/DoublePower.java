@@ -7,6 +7,9 @@ public class DoublePower {
         int y = 4;
         System.out.format("%.2f power %d is: %.4f \n", x, y, power(x, y));
 
+        x = 2; y = 3;
+        System.out.format("%.2f power %d is: %.4f \n", x, y, power(x, y));
+
         x = 4; y = -2;
         System.out.format("%.2f power %d is: %.4f \n", x, y, power(x, y));
     }
