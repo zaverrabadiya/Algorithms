@@ -4,7 +4,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[] input = {5, 4, 0, 1, 3, 2};
+        //int[] input = {5, 4, 0, 1, 3, 2};
+        int[] input = {1, 2, 3, 9, 4, 6, 10, 8, 11, 5, 4, 7};
         int[] result = MergeSort(input);
 
         for (int i : result) {
@@ -27,14 +28,14 @@ public class Main {
         }
     }
 
-    private static void merge(int[] arr, int s, int mid, int e){
+    private static void merge(int[] arr, int s, int mid, int e) {
         int[] mergedArr = new int[arr.length];
         int j = s, k = mid + 1;
 
         for (int i = s; i <= e; i++) {
-            if (j <= mid && k > e) {
+            if (k > e) {
                 mergedArr[i] = arr[j++];
-            } else if (k <= e && j > mid) {
+            } else if (j > mid) {
                 mergedArr[i] = arr[k++];
             } else if (arr[j] < arr[k]) {
                 mergedArr[i] = arr[j++];
