@@ -10,7 +10,6 @@ public class Main {
         for (int prime: findPrimes(18)) {
             System.out.print(prime + "  ");
         }
-        System.out.println("Floor " + (int)(Math.floor(0.5 * (15)) + 1));
     }
 
     public static List<Integer> findPrimes(int n) {
