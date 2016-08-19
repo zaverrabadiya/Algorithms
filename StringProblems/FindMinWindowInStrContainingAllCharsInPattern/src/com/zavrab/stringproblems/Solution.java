@@ -34,6 +34,7 @@ public class Solution {
                 currChar = inStr.charAt(i);
 
                 // Advance the begin pointer till found characters are more than needed to find
+                // or do not need to find the current character from string.
                 while (i < j && (needToFind[currChar] == 0 || (hasFound[currChar] > needToFind[currChar]))) {
                     if (hasFound[currChar] > needToFind[currChar]) {
                         hasFound[currChar]--;
