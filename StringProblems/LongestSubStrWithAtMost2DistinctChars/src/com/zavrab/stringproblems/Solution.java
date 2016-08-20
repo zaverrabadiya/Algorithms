@@ -14,20 +14,18 @@ public class Solution {
 
     public static String longestSubStrWithAtMost2DistinctChars(String strText) {
         HashMap<Character, Integer> distChars = new HashMap<Character, Integer>();
-        int subStrFrom = 0, maxLen = 0, startPos = 0;
+        int subStrFrom = 0, currLen = 0, maxLen = 0, startPos = 0, count = 0;
+        char currChar;
 
         for (int i = 0; i < strText.length(); i++) {
-            char c = strText.charAt(i);
+            currChar = strText.charAt(i);
 
-            if (distChars.containsKey(c)) {
-                int count = distChars.get(c);
-                distChars.put(c, ++count);
-            } else {
-                distChars.put(c, 1);
-            }
+            count = distChars.containsKey(currChar) ? count + 1 : 1;
+            distChars.put(currChar, count);
 
             if (distChars.size() > 2) {
-                int currLen = i - startPos;
+                currLen = i - startPos;
+
                 if (currLen > maxLen) {
                     maxLen = currLen;
                     subStrFrom = startPos;
@@ -35,28 +33,28 @@ public class Solution {
 
                 while (distChars.size() > 2) {
                     char c1 = strText.charAt(startPos);
-                    int count = distChars.get(c1);
+                    count = distChars.get(c1);
 
                     if (count > 1) {
                         distChars.put(c1, --count);
                     } else {
                         distChars.remove(c1);
                     }
+
                     startPos++;
                 }
             }
         }
 
-        int currLen = strText.length() - startPos;
+        // Suppose whole string or last substring contains only 2 distinct characters
+        // then if (distChars.size() > 2) won't be executed
+        currLen = strText.length() - startPos;
+
         if (currLen > maxLen && distChars.size() > 1) {
             maxLen = currLen;
             subStrFrom = startPos;
         }
 
-        if (maxLen > 0) {
-            return strText.substring(subStrFrom, (subStrFrom + maxLen));
-        }
-
-        return "";
+        return (maxLen > 0)? strText.substring(subStrFrom, (subStrFrom + maxLen)) : "";
     }
 }
