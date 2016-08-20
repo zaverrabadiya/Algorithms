@@ -35,8 +35,8 @@ public class RegexMatcher {
         }
 
         if (j + 1 < r.length() && r.charAt(j + 1) == '*') { // Check if second char is '*'
-            return isMatching(s, r, i, j + 2)            // If second char is '*' then jump to char after '*' in REGEX
-                    || ((i != s.length() && (s.charAt(i) == r.charAt(j) || r.charAt(j) == '.'))
+            return isMatching(s, r, i, j + 2) ||            // If second char is '*' then jump to char after '*' in REGEX, meaning Zero character matching from regex
+                    ((i != s.length() && (s.charAt(i) == r.charAt(j) || r.charAt(j) == '.'))
                     && isMatching(s, r, i + 1, j));          // If second char is '*' and string-regex matches then jump to next char in String
         }
 
