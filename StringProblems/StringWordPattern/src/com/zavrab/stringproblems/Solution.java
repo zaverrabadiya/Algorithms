@@ -14,23 +14,20 @@ public class Solution {
         // pattern = "abab", str = "cat dog cat dog" => true
 
         String pattern = "abba", inStr = "dog cat cat fish";
-        //System.out.print(isStrFollowsPattern(pattern, inStr));
+        System.out.println(matchWithSpace(pattern, inStr));
 
+        //Given a pattern and a string str, find if str follows the same pattern. NO SPACE IN STRING
         //    pattern = "abab", str = "redblueredblue" => true
         //    pattern = "aaaa", str = "asdasdasdasd" => true
         //    pattern = "aabb", str = "xyzabcxyzabc" => false
 
-        String pattern2 = "hi", inStr2 = "zaver";
-      //  System.out.print(isStrFollowsPatternNoSpace(pattern2, inStr2));
-
-        //System.out.println(PatternMatch.checkPattern("abab","redblueredblue"));
-        System.out.println(PatternMatch.match("abab","redblueredblue"));
-//        System.out.println(checkPattern("aabb","xyzabcxzyabc"));
+        System.out.println(matchNoSpace("abab","redblueredblue"));
+        System.out.println(matchNoSpace("aabb","xyzabcxzyabc"));
 
     }
 
 
-    public static boolean isStrFollowsPattern(String pattern, String inStr) {
+    public static boolean matchWithSpace(String pattern, String inStr) {
         // Bijection maps
         HashMap<String, Character> wordToPatternMap = new HashMap<String, Character>();
         HashMap<Character, String> patternToWordMap = new HashMap<Character, String>();
@@ -69,61 +66,43 @@ public class Solution {
         return true;
     }
 
+    private static HashMap<Character, String> map;
 
-//    pattern = "abab", str = "redblueredblue" => true
-//    pattern = "aaaa", str = "asdasdasdasd" => true
-//    pattern = "aabb", str = "xyzabcxzyabc" => false
+    public static boolean matchNoSpace(String pattern, String str) {
+        map = new HashMap<Character, String>();
+        boolean res = matchNoSpaceRec(pattern, str);
+        return res;
+    }
 
-    public static boolean isStrFollowsPatternNoSpace(String pattern, String inStr) {
-        // Bijection maps
-        HashMap<String, Character> wordToPatternMap = new HashMap<String, Character>();
-        HashMap<Character, String> patternToWordMap = new HashMap<Character, String>();
+    private static boolean matchNoSpaceRec(String pattern, String str) {
+        if (pattern.length() == 0) {
+            return str.length() == 0;
+        }
 
-        int pIndx = 0, wIndx = 0;
-        String word = "";
+        char pch = pattern.charAt(0);
 
-        //Find equal word length
-        int halfLen = inStr.length() / 2;
+        for (int i = 0; i < str.length(); ++i) {
 
+            if (!map.containsKey(pch)) {
+                String val = str.substring(0, i + 1);
+                map.put(pch, val);
 
-        int leftLen = (halfLen / 2), rightLen = (halfLen - leftLen);
-        boolean left = true;
-
-        for (int i = 0; i <= inStr.length(); i++) {
-
-            if (i == inStr.length() || (left && wIndx == leftLen) || (!left && wIndx == rightLen)) {
-                Character currentPattern = pattern.charAt(pIndx);
-                String wordFromMap = patternToWordMap.get(currentPattern);
-                Character patternFromMap = wordToPatternMap.get(word);
-
-                // Check for word => pattern
-                if (patternFromMap == null) {
-                    wordToPatternMap.put(word, currentPattern);
-                } else if (!currentPattern.equals(patternFromMap)) {
-                    return false;
-                }
-
-                // Check for pattern => word
-                if (wordFromMap == null) {
-                    patternToWordMap.put(currentPattern, word);
-                } else if (!word.equals(wordFromMap)) {
-                    return false;
-                }
-
-                pIndx++;
-                left = !left;
-
-                if (i < inStr.length()) {
-                    word = "" + inStr.charAt(i);
-                    wIndx = 1;
+                if (matchNoSpaceRec(pattern.substring(1), str.substring(val.length()))) {
+                    return true;
+                } else {
+                    map.remove(pch);
                 }
 
             } else {
-                word += inStr.charAt(i);
-                wIndx++;
+                String val = map.get(pch);
+
+                if (!str.startsWith(val)) {
+                    return false;
+                }
+
+                return matchNoSpaceRec(pattern.substring(1), str.substring(val.length()));
             }
         }
-
-        return true;
+        return false;
     }
 }

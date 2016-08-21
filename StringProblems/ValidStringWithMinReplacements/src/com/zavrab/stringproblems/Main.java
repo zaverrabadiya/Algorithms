@@ -12,7 +12,22 @@ public class Main {
         // "bababb" => "bbbbbb" swaps: 2
 
         String input = "abaabab";
-        System.out.format("Min swap output: %s => %s", input, validStringWithMinReplacements(input));
+        System.out.format("Min swap output: %s => %s \n", input, validStringWithMinReplacements(input));
+
+        input = "baab";
+        System.out.format("Min swap output: %s => %s \n", input, validStringWithMinReplacements(input));
+
+        input = "abba";
+        System.out.format("Min swap output: %s => %s \n", input, validStringWithMinReplacements(input));
+
+        input = "bbbaa";
+        System.out.format("Min swap output: %s => %s \n", input, validStringWithMinReplacements(input));
+
+        input = "ababaa";
+        System.out.format("Min swap output: %s => %s \n", input, validStringWithMinReplacements(input));
+
+        input = "bababb";
+        System.out.format("Min swap output: %s => %s \n", input, validStringWithMinReplacements(input));
     }
 
     public static String validStringWithMinReplacements(String inStr) {
@@ -33,20 +48,16 @@ public class Main {
         // Find min swap at every element by comparing total b's before and a's after the current element
         for (int j = 0; j < inStr.length(); j++) {
             if (inStr.charAt(j) == 'a') {
-                totalSwaps = numOfBs + (--numOfAs); // Decrease 'a' since it is current and need not to replace with 'b'
-
-                if (totalSwaps < minSwaps) {
-                    minSwaps = totalSwaps;
-                    minIndex = j;
-                }
+                numOfAs--; // Decrease 'a' since it is current character and need not to replace with 'b'
+                totalSwaps = numOfBs + numOfAs;
             } else {
                 totalSwaps = numOfBs + numOfAs;
-
-                if (totalSwaps < minSwaps) {
-                    minSwaps = totalSwaps;
-                    minIndex = j;
-                }
                 numOfBs++; // Increase 'b' since moving to right
+            }
+
+            if (totalSwaps < minSwaps) {
+                minSwaps = totalSwaps;
+                minIndex = j;
             }
         }
 
