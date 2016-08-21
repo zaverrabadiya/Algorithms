@@ -2,7 +2,6 @@ package com.zavrab.treeproblems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Created by ZaverR on 7/9/16.
@@ -10,7 +9,6 @@ import java.util.Stack;
 public class Tree {
 
     private Node root;
-    private Node prev = null;
     private static Node head = null;
 
     public void createBalancedBst(int[] intArr){
@@ -19,8 +17,10 @@ public class Tree {
     }
 
     public Node flatten() {
-        flatten(root);
-        return root;
+        FlattNode result = new FlattNode();
+        flatten(root, result);
+
+        return result.root;
     }
 
     public static Node merge(Node head1, Node head2) {
@@ -69,7 +69,7 @@ public class Tree {
         }
 
         head = root;
-        return balance(size);
+        return balance(size, head);
     }
 
     public static void printBst(Node root) {
@@ -160,23 +160,27 @@ public class Tree {
         }
     }
 
-    private void flatten(Node curr) {
+
+    private void flatten(Node curr, FlattNode fNode) {
         if (curr == null) {
             return;
         }
 
-        flatten(curr.left);
+        flatten(curr.left, fNode);
 
-        if (prev != null) {
-            prev.right = curr;
-        } else {
-            root = curr;
+        // Root can be null only once, when we went all the way down to left node
+        if (fNode.root == null) {
+            fNode.root = curr;
         }
 
-        prev = curr;
+        if (fNode.prev != null) {
+            fNode.prev.right = curr;
+        }
+
+        fNode.prev = curr;
         curr.left = null;
 
-        flatten(curr.right);
+        flatten(curr.right, fNode);
     }
 
     private static Node balance(int size) {
@@ -204,5 +208,11 @@ public class Tree {
         node.right = balance(rightSize);
 
         return node;
+    }
+
+    /****************************** PRIVATE CLASSES *************************/
+    private static class FlattNode {
+        Node prev;
+        Node root;
     }
 }

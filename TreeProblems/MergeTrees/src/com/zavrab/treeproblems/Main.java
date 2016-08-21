@@ -9,6 +9,8 @@ public class Main {
         int[] arr1 = new int[] {39, 4, 80, 50, 18, 6, 5, 13, 32, 28, 23, 22, 25, 41, 66, 53, 52, 58, 84, 82};
         int[] arr2 = new int[] {27, 69, 18, 12, 16, 66, 53, 30, 27, 37, 62, 58, 95, 73};
         Tree tree1 = new Tree();
+
+        int[] ar = new int[] {2, 1, 3};
         tree1.createBalancedBst(arr1);
         Node head1 = tree1.flatten();
 
@@ -20,6 +22,8 @@ public class Main {
 
         Tree.printInOrder(root);
         root = Tree.balance(root);
+
+        System.out.println("\n\nPrinting after merging:");
         Tree.printBst(root);
     }
 }
