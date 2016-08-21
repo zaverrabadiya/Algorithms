@@ -12,27 +12,43 @@ public class Main {
         // "VI" = 6
 
         String roman = "XI";
-        System.out.println("Roman to Decimal: " + rtoi(roman));
+        System.out.format("\nRoman : %s to decimal: %d", roman, rtoi(roman));
+
+        roman = "MMMMCMXCIX";
+        System.out.format("\nRoman : %s to decimal: %d", roman, rtoi(roman));
+
+        roman = "IV";
+        System.out.format("\nRoman : %s to decimal: %d", roman, rtoi(roman));
+
+        roman = "VI";
+        System.out.format("\nRoman : %s to decimal: %d", roman, rtoi(roman));
+
+        roman = "I";
+        System.out.format("\nRoman : %s to decimal: %d", roman, rtoi(roman));
     }
 
     private static final HashMap<Character, Integer> rToIMap = prePopulateMap();
 
-    static int rtoi(String strRoman) {
+    public static int rtoi(String strRoman) {
         if (strRoman == null || strRoman.isEmpty()) {
             return 0;
         }
-        int number = 0;
+
+        int number = 0, currNum;
 
         for (int i = 0; i < strRoman.length(); i++) {
-            int current = rToIMap.get(strRoman.charAt(i));
+            currNum = rToIMap.get(strRoman.charAt(i));
+
             if (i < strRoman.length() - 1) {
                 int next = rToIMap.get(strRoman.charAt(i + 1));
-                if (next > current) {
-                    current = next - current;
+
+                if (next > currNum) {
+                    currNum = next - currNum;
                     i++;
                 }
             }
-            number += current;
+
+            number += currNum;
         }
         return number;
     }
