@@ -23,7 +23,7 @@ public class Tree {
         ReturnValue right = countUnivalTrees(root.right);
 
         int countSofar = left.count + right.count;
-        ReturnValue returnValue = new ReturnValue(countSofar, false);
+        ReturnValue returnValue = new ReturnValue(countSofar, true);
 
         if (left.isUnival && right.isUnival) {
             if (root.left == null && root.right == null) {

@@ -69,7 +69,7 @@ public class Tree {
         }
 
         head = root;
-        return balance(size, head);
+        return balance(size);
     }
 
     public static void printBst(Node root) {

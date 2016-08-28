@@ -19,6 +19,7 @@ public class CoinPlay {
         for (int k = 0; k < n; k++) {
             for (int i = 0, j = k; j < n; i++, j++) {
 
+                // i has to be less than or equal to j because j is starting from end
                 int x = ((i + 2) <= j) ? cache[i + 2][j] : 0;
 
                 int y = ((i + 1) <= (j - 1)) ? cache[i + 1][j - 1] : 0;

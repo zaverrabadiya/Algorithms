@@ -17,7 +17,7 @@ public class LcsSolution {
         //System.out.print("LCS :" + getLcsNaive(x, y));
     }
 
-    //Finc LCS ITERATIVELY with CACHE: O(nm)
+    //Find LCS ITERATIVELY with CACHE: O(nm)
     public static String getLcs(String strX, String strY) {
         int n = strX.length(), m = strY.length();
         int[][] cache = buildLcsMemoization(strX, strY, n, m);

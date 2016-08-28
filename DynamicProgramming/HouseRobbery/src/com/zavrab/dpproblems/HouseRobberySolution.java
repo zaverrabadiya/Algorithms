@@ -48,8 +48,8 @@ public class HouseRobberySolution {
         int value = 0;
 
         for (int i = 2; i < houseValues.length; i++) {
-            value = Math.max(value2, value1 + houseValues[i]);
-            value1 = value2;
+            value = Math.max(value2, value1 + houseValues[i]); // Can add to 1st value and curr element because first is h[0] and i = 2
+            value1 = value2; // First gets second's value because i is increasing to 3
             value2 = value;
         }
 
