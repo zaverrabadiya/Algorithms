@@ -12,10 +12,12 @@ public class BalancedPartitionSolution {
         //int arr[] = {2, 4, 8, 4};
         int arr[] = {2, 4, 4, 1, 2, 1};
 
-        balancedPartition(arr);
+        boolean result = balancedPartition(arr);
+
+        System.out.println("\nIs balanced partition: " + result);
     }
 
-    public static int[] balancedPartition(int[] arr) {
+    public static boolean balancedPartition(int[] arr) {
         List<Integer> partition = new ArrayList<Integer>();
         int sum = 0;
 
@@ -24,13 +26,13 @@ public class BalancedPartitionSolution {
         }
 
         if (sum % 2 != 0) {
-            return null;
+            return false;
         }
 
         //boolean result = balancedPartitionRec(arr, arr.length - 1, sum / 2, partition);
 
         boolean result = findPartition(arr, sum);
-        return null;
+        return result;
     }
 
     // DP Solution
@@ -44,11 +46,7 @@ public class BalancedPartitionSolution {
         }
 
         for (i = 1; i <= sum/2; i++) {
-            part[i][0] = false;
-        }
-
-        for (i = 1; i <= sum/2; i++) {
-            for (j = 1; j < n; j++) {
+            for (j = 1; j <= n; j++) {
                 part[i][j] = part[i][j-1];
 
                 if (i >= arr[j-1]) {
@@ -57,9 +55,10 @@ public class BalancedPartitionSolution {
             }
         }
 
+        System.out.println("Table for debug:");
         for (i = 0; i <= sum/2; i++) {
             for (j = 0; j <= n; j++) {
-                System.out.print(" " + part[i][j]);
+                System.out.print(part[i][j] + " ");
             }
             System.out.println();
         }
