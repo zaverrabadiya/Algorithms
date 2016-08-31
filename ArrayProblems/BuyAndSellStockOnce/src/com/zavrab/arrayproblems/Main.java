@@ -9,10 +9,10 @@ public class Main {
     }
 
     public static int computeMaxProfit(int[] S) {
-        int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
+        int minPrice = S[0];
 
-        for (int i = 0; i < S.length; i++) {
+        for (int i = 1; i < S.length; i++) {
             maxProfit = Math.max(maxProfit, (S[i] - minPrice));
             minPrice = Math.min(minPrice, S[i]);
         }
