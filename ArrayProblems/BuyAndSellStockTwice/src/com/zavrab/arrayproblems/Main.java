@@ -10,11 +10,12 @@ public class Main {
 
     //Buy and sell twice, second buy must be after 1st sell
     public static int computeMaxProfitByBuyingAndSellingTwice(int[] prices) {
-        int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
+        int minPrice = prices[0];
 
         //Forward max profits
         int[] f = new int[prices.length];
+
         for (int i = 0; i < prices.length; i++) {
             maxProfit = Math.max(maxProfit, prices[i] - minPrice);
             minPrice = Math.min(minPrice, prices[i]);
@@ -26,10 +27,11 @@ public class Main {
 
         //Backward max profits b = {7, 7, 7, 7, 7, 7, 2, 2, 0}
         //We compute maxProfit[i] = b[i] + f[i -1]; since the second buy must happen strictly after the first sell
-        int maxPrice = Integer.MIN_VALUE;
-        for (int j = prices.length - 1; j > 0; j--) {
-            maxPrice = Math.max(maxPrice, prices[j]);
+        int maxPrice = prices[prices.length - 1];
+
+        for (int j = prices.length - 2; j > 0; j--) {
             maxProfit = Math.max(maxProfit , (maxPrice - prices[j]) + f[j - 1]);
+            maxPrice = Math.max(maxPrice, prices[j]);
         }
 
         return maxProfit;
