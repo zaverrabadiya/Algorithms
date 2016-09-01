@@ -1,4 +1,4 @@
-package com.zavrab.bitwiseoperation;
+package com.zavrab.arrayproblems;
 
 /*
 * Created by Zaver R on 02/17/2016
@@ -23,16 +23,18 @@ public class Main {
     }
 
     public static void rearrange(int[] A, int pivotIndex) {
-        int i =0, j = 0, l = A.length;
+        int i =0, j = 0, l = A.length-1;
         int pivot = A[pivotIndex];
-        while(j < l) {
+        while(j <= l) {
             if(A[j] < pivot) {
-                swap(A, i++, j++);
-
+                swap(A, i, j);
+                i++;
+                j++;
             } else if(A[j] == pivot) {
-                ++j;
+                j++;
             } else {
-                swap(A, j, --l);
+                swap(A, j, l);
+                l--;
             }
         }
     }
