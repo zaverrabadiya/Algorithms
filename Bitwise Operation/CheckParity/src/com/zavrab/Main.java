@@ -11,7 +11,7 @@ public class Main {
         //10100 (20) should return 0
         System.out.println("Parity is: " + checkParity(11));
         //Faster way to check parity for 64 bit word
-        //System.out.println("Parity is: " + parityTable(11));
+        System.out.println("Parity is: " + parityTable(11));
     }
 
     public static short checkParity(long x) {

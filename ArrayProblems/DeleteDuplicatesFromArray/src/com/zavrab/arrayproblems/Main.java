@@ -28,6 +28,8 @@ public class Main {
     // 15 => b[1]: 0 0 0 0 0 1 0
     // 21 => b[2]: 0 0 0 0 1 0 0
     // 88 => b[11]: 0 0 0 0 0 0 1
+
+    // UNSORTED
     public static int[] deleteDuplicatesFromUnSorted(int[] inArr) {
 
         final int BIT_LENGTH = 8;
@@ -54,7 +56,7 @@ public class Main {
         return Arrays.copyOf(inArr, writeIdx); // Copy original array to new array till unique element position;
     }
 
-    //Returns the number of valid entries after deletion
+    // SORTED: Returns the number of valid entries after deletion
     public static int[] deleteDuplicatesFromSorted(int[] A) {
         if(A.length == 0) {
             return null;

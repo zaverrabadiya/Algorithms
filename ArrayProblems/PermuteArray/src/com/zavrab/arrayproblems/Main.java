@@ -14,16 +14,17 @@ public class Main {
 
     public static void permuteArray(int[] p, Character[] s) {
         int n = s.length;
+
         for (int i = 0; i < n; i++) {
-            //Check if element at index i has not been moved by checking if  p[i] is nonnegetive.
             int next = i;
+
+            //Check if element at index i has not been moved by checking if  p[i] is non-negative.
             while (p[next] >= 0) {
                 swap(s, i, p[next]);
                 int temp =  p[next];
 
-                //Substract length n from an entry in permute array to make it negetive.
-                //which indicates the corresponding element has been moved.
-                p[next] = next - n;
+                // Mark permute element to negative, which indicates the corresponding element has been moved.
+                p[next] = -1;
                 next = temp;
             }
         }
