@@ -43,7 +43,7 @@ public class Main {
             result.add(sum);
         }
 
-        if (i == a.length || i < 0 || sum > max) {
+        if (i == a.length || sum > max) {
             return;
         }
 
