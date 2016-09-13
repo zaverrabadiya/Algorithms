@@ -47,14 +47,23 @@ public class Main {
             return;
         }
 
+        // Skip ith
         recHelper(a, i + 1, result, part, max);
 
+        // Add ith
         part.add(a[i]);
 
+        // Keep adding same one at i
         recHelper(a, i, result, part, max);
 
-        recHelper(a, i-1, result, part, max);
+        // Add elements previous to ith (start from 0 to i)
+        int j = 0;
+        while (j < i) {
+            recHelper(a, j, result, part, max);
+            j++;
+        }
 
+        // Remove last one
         part.remove(part.size() - 1);
     }
 
