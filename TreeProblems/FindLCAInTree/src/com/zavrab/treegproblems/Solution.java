@@ -18,7 +18,7 @@ public class Solution {
 
         Node root = createTree();
         Node n1 = new Solution().new Node(16);
-        Node n2 = new Solution().new Node(18);
+        Node n2 = new Solution().new Node(20);
         Node lca = findLCAInTree(root, n1, n2);
         System.out.print(lca.val);
     }
