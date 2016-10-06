@@ -57,10 +57,9 @@ public class Main {
         recHelper(a, i, result, part, max);
 
         // Add elements previous to ith (start from 0 to i)
-        int j = 0;
-        while (j < i) {
-            recHelper(a, j, result, part, max);
-            j++;
+        while (i >= 0) {
+            recHelper(a, i, result, part, max);
+            i--;
         }
 
         // Remove last one
