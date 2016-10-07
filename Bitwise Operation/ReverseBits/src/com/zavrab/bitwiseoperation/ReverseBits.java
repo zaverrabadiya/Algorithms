@@ -13,9 +13,9 @@ public class ReverseBits {
         //Need to do this only through half way e.g. 8 bits- i=0 to 3 and j= 7 to 4
         //When x is 16 bits i= 0 to 7 and j= 15 to 8
         for (int i = 0, j = 15; i < j; i++, j--) {
-            if(((x >>> i) & 1) != ((x >>> j) & 1)) {
-                long bitMask = (1 << i) | (1 << j);
-                x ^= bitMask;
+            if(((x >>> i) & 1) != ((x >>> j) & 1)) { // Check if MSB and LSB bits are not same
+                long bitMask = (1 << i) | (1 << j); // Set 1 to MSB and LSB
+                x ^= bitMask;   // XORing x to bitmask will revert the original bit ie 1 to 0 and 0 to 1
             }
         }
         return x;

@@ -13,20 +13,25 @@ public class Solution {
         // "()()()" => 6
         // "" => 0
 
-        System.out.print("Max len: " + maxLenMatchingParantheses("(((())(((()"));
+        System.out.print("Max len: " + maxLenMatchingParantheses("(((())()"));
     }
 
     public static int maxLenMatchingParantheses(String inStr) {
-        Stack<Character> paranStack = new Stack<Character>();
-        int len = 0, maxSoFar = 0;
+        Stack<Integer> paranStack = new Stack<Integer>();
+        paranStack.push(-1);
+        int len = 0;
 
         for (int i = 0; i < inStr.length(); i++) {
-            if (inStr.charAt(i) == ')' && (!paranStack.isEmpty() && paranStack.pop() == '(')) {
-                maxSoFar += 2;
+            if (inStr.charAt(i) == '(') {
+                paranStack.push(i);
             } else {
-                paranStack.push(inStr.charAt(i));
-                len = Math.max(len, maxSoFar);
-                maxSoFar = 0;
+                paranStack.pop();
+
+                if (!paranStack.isEmpty()) {
+                    len = Math.max(len, i - paranStack.peek());
+                } else {
+                    paranStack.push(i);
+                }
             }
         }
 
