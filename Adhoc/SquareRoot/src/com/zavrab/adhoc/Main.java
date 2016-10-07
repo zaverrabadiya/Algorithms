@@ -14,7 +14,7 @@ public class Main {
         double start = 0;
         double end = a;
         double e = 0.000001; /* e decides the accuracy level*/
-        double mid = Double.MIN_NORMAL;
+        double mid = 0.0;
 
         while(end - start > e)
         {

@@ -43,13 +43,16 @@ public class Main {
         while (!priorityQueue.isEmpty()) {
             minNode = priorityQueue.poll();
 
+            // Add min element to the result
+            output[s++] = minNode.val;
+
+            // Add next element to the queue from the same array that of Just extracted minimum element belongs to
             if (minNode.col < n-1) {
                 row = minNode.row;
                 col = minNode.col + 1;
                 priorityQueue.add(new Node(arr[row][col], row, col));
             }
 
-            output[s++] = minNode.val;
         }
 
         return output;
