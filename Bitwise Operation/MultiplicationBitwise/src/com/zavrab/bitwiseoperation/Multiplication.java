@@ -26,7 +26,7 @@ public class Multiplication {
             //CarryOut is > 0 if at least two bits are 1
             long carryOut = (xk & yk) | (xk & carryIn) | (yk & carryIn);
 
-            //Sum all thre bits e.g. 1 1 1 = 1, 1 0 1 = 0, 1 1 0 = 0
+            //Sum all three bits e.g. 1 1 1 = 1, 1 0 1 = 0, 1 1 0 = 0
             sum |= xk ^ yk ^ carryIn;
 
             carryIn = carryOut << 1; // forward carryOut for next left bit sum
