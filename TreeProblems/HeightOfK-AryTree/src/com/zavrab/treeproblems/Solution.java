@@ -18,7 +18,7 @@ public class Solution {
 
         int max = 0, height;
 
-        for (Node node: root.childrens) {
+        for (Node node : root.childrens) {
             height = height(node);
             max = Math.max(max, height);
         }
@@ -27,16 +27,16 @@ public class Solution {
     }
 
     private static Node createTree() {
-        Node root = new Solution(). new Node(15);
+        Node root = new Node(15);
 
-        root.childrens.add(new Solution(). new Node(10));
-        root.childrens.add(new Solution(). new Node(20));
+        root.childrens.add(new Node(10));
+        root.childrens.add(new Node(20));
 
-        root.childrens.get(0).childrens.add(new Solution(). new Node(8));
+        root.childrens.get(0).childrens.add(new Node(8));
         return root;
     }
 
-    private class Node {
+    private static class Node {
         int val;
         List<Node> childrens = new ArrayList<Node>();
 
