@@ -28,14 +28,7 @@ public class Solution {
         int leftMin = findMin(root.left);
         int rightMin = findMin(root.right);
 
-        int min = root.val;
-        if (leftMin < min ) {
-            min = leftMin;
-        }
-        if (rightMin < min) {
-            min = rightMin;
-        }
-        return min;
+        return Math.min(root.val, Math.min(leftMin, rightMin));
     }
 
     public int findMax(Node root) {
@@ -43,18 +36,9 @@ public class Solution {
             return Integer.MIN_VALUE;
         }
 
-        int max = root.val;
         int leftMax = findMax(root.left);
         int rightMax = findMax(root.right);
 
-        if (leftMax > max) {
-            max = leftMax;
-        }
-
-        if (rightMax > max) {
-            max = rightMax;
-        }
-
-        return max;
+        return Math.max(root.val, Math.max(leftMax, rightMax));
     }
 }
