@@ -8,7 +8,7 @@ import java.util.List;
 // http://stackoverflow.com/questions/2339101/knights-shortest-path-chess-question
 public class Main {
 
-    private static HashMap<Integer, List<Integer>> edges;
+    private static HashMap<Integer, List<Integer>> vertices;
     private static List<Integer> shortestPath;
     private static List<Integer> path;
     private static boolean[] visited;
@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         int boardSize = 8;
         Graph graph = new Graph();
-        edges = graph.createGraph(boardSize);
+        vertices = graph.createGraph(boardSize);
 
         // Knight tour shortest path call
         // Input Source cell: x1, y1 and  Destination cell: x2, y2
@@ -25,7 +25,7 @@ public class Main {
     }
 
     public static void knightTourPath(int x1, int y1, int x2, int y2, int boardSize) {
-        visited = new boolean[edges.size()];
+        visited = new boolean[vertices.size()];
         path = new ArrayList<Integer>();
 
         int src = Graph.coordinatesToNodeId(x1, y1, boardSize);
@@ -54,7 +54,7 @@ public class Main {
 
         if (!visited[node]) {
             visited[node] = true;
-            List<Integer> neighbors = edges.get(node);
+            List<Integer> neighbors = vertices.get(node);
 
             for (int i = 0; i < neighbors.size(); i++) {
                 if (!visited[neighbors.get(i)]) {

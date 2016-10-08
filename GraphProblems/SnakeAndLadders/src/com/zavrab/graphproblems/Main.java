@@ -5,7 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-//http://www.geeksforgeeks.org/snake-ladder-problem-2/
+/**
+ * http://www.geeksforgeeks.org/snake-ladder-problem-2/
+ *
+ * The idea is to consider the given snake and ladder board as a directed graph with number of vertices equal to the number of cells in the board.
+ * The problem reduces to finding the shortest path in a graph.
+ * Every vertex of the graph has an edge to next six vertices if next 6 vertices do not have a snake or ladder.
+ * If any of the next six vertices has a snake or ladder, then the edge from current vertex goes to the top of the ladder or tail of the snake.
+ * Since all edges are of equal weight, we can efficiently find shortest path using Breadth First Search of the graph.
+ *
+ * */
 
 public class Main {
 
@@ -48,25 +57,30 @@ public class Main {
                     Node node = new Node();
                     node.diceThrows = curr.diceThrows + 1;
                     node.path.addAll(curr.path);
+
+                    // Add this cell as part of the path
                     node.path.add(j);
 
                     node.moves.addAll(curr.moves);
+
+                    // Get dice number using current vertex - jth vertex
                     node.moves.add(j - v);
 
                     visited[j] = true;
 
                     if (moves[j] != -1) {
+                        // Jumps to the ladder head or snake tail
                         node.vertex = moves[j];
                         node.path.add(moves[j]);
                     } else {
                         node.vertex = j;
-
                     }
 
                     queue.add(node);
                 }
             }
         }
+
         return curr;
     }
 

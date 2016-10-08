@@ -28,9 +28,11 @@ public class Trie {
             char c = word.charAt(i);
 
             TrieNode node = current.children.get(c);
+
             if (node == null) {
                 return null;
             }
+
             current = node;
         }
 
@@ -44,9 +46,11 @@ public class Trie {
             char c = word.charAt(i);
 
             TrieNode node = current.children.get(c);
+
             if (node == null) {
                 return false;
             }
+
             current = node;
         }
 
@@ -74,12 +78,15 @@ public class Trie {
             char c = word.charAt(i);
 
             TrieNode node = current.children.get(c);
+
             if (node == null) {
                 node = new TrieNode();
                 current.children.put(c, node);
             }
+
             current = node;
         }
+
         current.endOfWord = true;
         current.positions.add(pos);
     }

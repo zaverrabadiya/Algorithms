@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-	    //TODO Create graph same as board but with 6 edges i.e. b[1][1] -> i-1,j-1=true, i-1=true, j-1=true, j+1=true etc...
+	    //TODO Create graph same as board but with 8 edges i.e. b[1][1] -> i-1,j-1=true, i-1=true, j-1=true, j+1=true etc...
         String[] dictionary = {"Geek", "Quiz"};
         String[][] boggle = {
                 {"G", "I", "Z"},

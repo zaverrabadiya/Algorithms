@@ -3,7 +3,13 @@ package com.zavrab.graphproblems;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-// http://www.ardendertat.com/2011/12/20/programming-interview-questions-23-find-word-positions-in-text/
+
+/**
+ * http://www.ardendertat.com/2011/12/20/programming-interview-questions-23-find-word-positions-in-text/
+ *
+ *
+ * */
+
 public class Solution {
 
     private static Hashtable<String, List<Integer>> index;
