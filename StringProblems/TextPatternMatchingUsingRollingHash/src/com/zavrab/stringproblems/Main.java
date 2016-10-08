@@ -15,25 +15,28 @@ public class Main {
     }
 
     public static boolean isTextPatternMatching(String inStr, String inPattern) {
+        int patternLen = inPattern.length();
+
         if (inPattern.length() > inStr.length()) {
             return false;
         }
 
         int patternHash = calculateRollingHash(inPattern);
-        int textHash = calculateRollingHash(inStr.substring(0, inPattern.length()));
+        int textHash = calculateRollingHash(inStr.substring(0, patternLen));
 
         if (textHash == patternHash && inStr.substring(0, inPattern.length()).equals(inPattern)) {
             return true;
         }
-        int end = inStr.length() - inPattern.length();
+
+        int end = inStr.length() - patternLen;
         char left, right;
 
         for (int i = 1; i <= end; i++) {
             left = inStr.charAt(i - 1);
-            right = inStr.charAt(i + inPattern.length() - 1);
-            textHash = updateRollingHash(textHash, left, right, inPattern.length());
+            right = inStr.charAt(i + patternLen - 1);
+            textHash = updateRollingHash(textHash, left, right, patternLen);
 
-            if (textHash == patternHash && inStr.substring(i, i + inPattern.length()).equals(inPattern)) {
+            if (textHash == patternHash && inStr.substring(i, i + patternLen).equals(inPattern)) {
                 return true;
             }
         }

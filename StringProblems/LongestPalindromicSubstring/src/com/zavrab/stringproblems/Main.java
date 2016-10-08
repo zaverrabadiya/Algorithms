@@ -50,7 +50,7 @@ public class Main {
             charArray[j++] = s.charAt(i);
         }
         charArray[j++] = '#';
-        charArray[j++] = '$'; //Ending unique char
+        charArray[j] = '$'; //Ending unique char
 
         return charArray;
     }

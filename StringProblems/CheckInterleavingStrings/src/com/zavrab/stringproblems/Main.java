@@ -39,6 +39,7 @@ public class Main {
         if (b < B.length() && I.charAt(i) == B.charAt(b)) {
             bMatches = isInterleaved(i + 1, a, b + 1, A, B, I);
         }
+
         return aMatches || bMatches;
     }
 

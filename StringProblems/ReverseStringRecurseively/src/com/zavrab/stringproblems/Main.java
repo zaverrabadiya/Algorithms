@@ -11,8 +11,10 @@ public class Main {
         if (s.length() == 0) {
             return "";
         }
+
         char last = s.charAt(s.length() - 1);
         String reversed = reverseString(s.substring(0, s.length() - 1)); //substring endIndex is exclusive
+
         return last + reversed;
     }
 }

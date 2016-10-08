@@ -16,19 +16,24 @@ public class Main {
         String reversed = reverseString(inStr);
         String reversedWords = "";
         int i = 0;
+
         while (i < reversed.length()) {
             String word = "";
+
             while (i < reversed.length() && reversed.charAt(i) != ' ' && reversed.charAt(i) != ']') {
                 word += reversed.charAt(i++);
             }
 
-            reversedWords +=  reverseString(word);
+            reversedWords += reverseString(word);
             word = "";
+
             while (i < reversed.length() && (reversed.charAt(i) == ' ' || reversed.charAt(i) == '[' || reversed.charAt(i) == ']')) {
                 word += reversed.charAt(i++);
             }
+
             reversedWords += reverseString(word);
         }
+
         return reversedWords;
     }
 
