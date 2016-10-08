@@ -23,7 +23,7 @@ public class Tree {
         ReturnValue right = countUnivalTrees(root.right);
 
         int countSofar = left.count + right.count;
-        ReturnValue returnValue = new ReturnValue(countSofar, true);
+        ReturnValue returnValue = new ReturnValue(countSofar, false);
 
         if (left.isUnival && right.isUnival) {
             if (root.left == null && root.right == null) {
@@ -40,7 +40,7 @@ public class Tree {
             }
             else if (root.right == null && root.left != null && root.val == root.left.val) {
                 returnValue.isUnival = true;
-               returnValue.count += 1;  // Include subtree formed from current root
+                returnValue.count += 1;  // Include subtree formed from current root
             }
         }
 
@@ -59,7 +59,7 @@ public class Tree {
 
     private Node createTree() {
         Node root = new Node(5);
-        root.left = new Node(5);
+        root.left = new Node(1);
         root.right = new Node(5);
 
         root.left.left = new Node(5);
@@ -68,7 +68,6 @@ public class Tree {
         root.right.left = new Node(5);
         root.right.right = new Node(5);
 
-        root.left.left.left = new Node(1);
         return root;
     }
 
