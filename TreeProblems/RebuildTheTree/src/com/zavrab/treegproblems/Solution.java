@@ -39,7 +39,7 @@ public class Solution {
             return null;
         }
 
-        Node node = new Solution().new Node(preOrder[preIdx++]);
+        Node node = new Node(preOrder[preIdx++]);
 
         int inOrderIdx = search(inOrder, node.val, start, end);
 
@@ -96,7 +96,7 @@ public class Solution {
         }
     }
 
-    private class Node {
+    private static class Node {
         int val;
         Node left;
         Node right;

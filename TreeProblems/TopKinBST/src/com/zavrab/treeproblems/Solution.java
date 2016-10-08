@@ -37,13 +37,14 @@ public class Solution {
         Stack<Node> visitedNodes = new Stack<Node>();
         Node curr = root;
 
-        while ((visitedNodes.size() > 0 || curr != null) && k > 0) {
+        while ((!visitedNodes.isEmpty() || curr != null) && k > 0) {
             if (curr != null) {
                 visitedNodes.push(curr);
                 curr = curr.left;
             } else {
                 curr = visitedNodes.pop();
                 System.out.print(curr.val + " ");
+
                 k--;
                 curr = curr.right;
             }

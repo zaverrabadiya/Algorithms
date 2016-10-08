@@ -12,6 +12,7 @@ public class TreeIterator {
 
     public TreeIterator(Node root) {
         this.root = root;
+
         populateNodes(root);
     }
 
@@ -21,7 +22,8 @@ public class TreeIterator {
 
     public Node next() {
         Node node = nodes.pop();
-        populateNodes(node.right);
+        populateNodes(node.right);  // Push nodes from right-subtree
+
         return node;
     }
 

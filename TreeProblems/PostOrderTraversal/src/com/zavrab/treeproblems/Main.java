@@ -1,4 +1,4 @@
-package com.zavrab.treegproblems;
+package com.zavrab.treeproblems;
 
 import java.util.Stack;
 
@@ -15,6 +15,7 @@ public class Main {
         postOrderTraversalRecursively(root);
     }
 
+    // ITERATIVE Solution
     public static void postOrderTraversalIteratively(Node root) {
 
         if (root == null) {
@@ -26,18 +27,20 @@ public class Main {
         Stack<Node> nodeStack = new Stack<Node>();
         nodeStack.push(root);
 
-        while (nodeStack.size() > 0) {
-
+        while (!nodeStack.isEmpty()) {
             if (currNode.left != null && currNode.left != lastNode && currNode.right != lastNode) {
                 currNode = currNode.left;
                 nodeStack.push(currNode);
-            } else if (currNode.right != null && currNode.right != lastNode){
+            }
+            else if (currNode.right != null && currNode.right != lastNode){
                 currNode = currNode.right;
                 nodeStack.push(currNode);
-            } else {
+            }
+            else {
                 lastNode = nodeStack.pop();
                 System.out.print(lastNode.val + " ");
-                if (nodeStack.size() > 0) {
+
+                if (!nodeStack.isEmpty()) {
                     currNode = nodeStack.peek();
                 }
             }
@@ -45,6 +48,7 @@ public class Main {
     }
 
 
+    // RECURSIVE Solution
     public static void  postOrderTraversalRecursively(Node root) {
         if (root == null) {
             return;
