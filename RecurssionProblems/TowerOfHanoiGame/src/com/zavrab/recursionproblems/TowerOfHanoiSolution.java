@@ -32,16 +32,26 @@ public class TowerOfHanoiSolution {
     }
     private static void moveTower(int disk, Stack<Integer> src, Stack<Integer> dest, Stack<Integer> spare) {
         if (disk == 1) {
+            // Just helper to move disk from source tower to destination tower
             moveDisk(src, dest);
+
             System.out.format("Source: %d, Dest: %d, Spare: %d \n", src.size(), dest.size(), spare.size());
-        } else {
+        }
+        else {
+            // Recurse: source to spare
             moveTower(disk - 1, src, spare, dest);
+
+            // Just helper to move disk from source tower to destination tower
             moveDisk(src, dest);
+
             System.out.format("Source: %d, Dest: %d, Spare: %d \n", src.size(), dest.size(), spare.size());
+
+            // Recurse: spare to destination
             moveTower(disk - 1, spare, dest, src);
         }
     }
 
+    // Just helper to move disk from source tower to destination tower
     private static void moveDisk(Stack<Integer> src, Stack<Integer> dest) {
         dest.push(src.pop());
     }

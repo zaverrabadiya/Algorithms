@@ -11,8 +11,8 @@ public class Solution {
         // I:"123", A:"", B"123" => True
         // I:"112233", A:"321", B"321" => False
 
-        String I = "xxxxyx", A = "y", B = "xxxxx";
-        System.out.print("Is interleaving: " + isInterleaving(I, A, B));
+        String I = "112233", A = "123", B = "123";
+        System.out.println("\nIs interleaving: " + isInterleaving(I, A, B));
     }
 
     public static boolean isInterleaving(String I, String A, String B) {
@@ -47,6 +47,19 @@ public class Solution {
                 }
             }
         }
+
+        //PRINT DEBUG TABLE
+        printTable(cache);
+
         return cache[n][m];
+    }
+
+    private static void printTable(boolean[][] cache) {
+        for (int i = 0; i < cache.length; i++) {
+            for (int j = 0; j < cache[0].length; j++) {
+                System.out.print(cache[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
 }

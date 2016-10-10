@@ -36,6 +36,7 @@ public class Solution {
                 }
             }
         }
+
         return cache[change];
     }
 
@@ -43,22 +44,27 @@ public class Solution {
         if (cache[change] > 0) {
             return cache[change];
         }
+
         int min = 0;
 
         for (int coin : coins) {
             if (change - coin == 0) {
                 return 1;
             }
+
             if (change - coin > 0) {
                 int ans = coinChangeWithCache(coins, change - coin, cache);
+
                 if (ans != 0) {
                     if (min == 0 || ans < min) {
                         min = ans;
                     }
                 }
+
                 cache[change - coin] = min;
             }
         }
+
         return min + 1;
     }
 
@@ -69,6 +75,7 @@ public class Solution {
             if (change - coin == 0) {
                 return 1;
             }
+
             if (change - coin > 0) {
                 int ans = coinChangeRecursively(coins, change - coin);
 
@@ -79,6 +86,7 @@ public class Solution {
                 }
             }
         }
+
         return min + 1;
     }
 
@@ -96,6 +104,7 @@ public class Solution {
         for (int i = 1; i <= change; i++) {
             for (int j = 0; j < coins.length; j++) {
                 cache[i][j] = new ArrayList<Integer>();
+
                 if (j > 0) {
                     cache[i][j].addAll(cache[i][j - 1]); //Copy result of previous coin
                 }
@@ -116,21 +125,25 @@ public class Solution {
         printCombinationFromCache(cache, change, coins.length);
     }
 
-    private static void printCombinationFromCache(List[][] cache, int n, int m) {
+    private static void printCombinationFromCache(List[][] cache, int change, int coinsLength) {
         int min = Integer.MAX_VALUE;
         String result = "";
 
-        for (int c = m - 1; c >= 0; c--) {
-            List<Integer> combination = cache[n][c];
+        for (int c = coinsLength - 1; c >= 0; c--) {
+            List<Integer> combination = cache[change][c];
+
             if (combination.size() <= min) {
                 String currResult = "";
+
                 for (Integer d : combination) {
                     currResult += d + ",";
                 }
+
                 if (!result.equals(currResult)) {
                     System.out.println(currResult.substring(0, currResult.length() - 1)); //Trim last ','
                     result = currResult;
                 }
+
                 min = combination.size();
             }
         }

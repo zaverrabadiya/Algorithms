@@ -19,17 +19,27 @@ public class Main {
 
         if (i == set.length) {
             System.out.print("{");
+
             for (int k = 0; k < subset.size(); k++) {
                 System.out.print(subset.get(k));
             }
+
             System.out.print("}");
             System.out.println();
+
             return;
         }
 
+        // Recurse
         printSubsets(set, i + 1,  subset); //Do not pick anything
-        subset.add(set[i]); // Pick one
+
+        // Pick one before recursion
+        subset.add(set[i]);
+
+        // Recurse
         printSubsets(set, i + 1, subset);
-        subset.remove(subset.size() - 1); //Drop
+
+        // Drop the last one after recursion
+        subset.remove(subset.size() - 1);
     }
 }

@@ -1,7 +1,14 @@
 package com.zavrab.dpproblems;
 
-// http://n00tc0d3r.blogspot.com/2013/07/optimal-game-strategy-maximum-coin-value.html
-
+/**
+ * Consider a row of n coins of values (v1, ..., vn), where n is even.
+ * We play a game against an opponent by alternating turns.
+ * In each turn, a player selects either the first or last coin from the row, removes it from the row permanently,
+ * and receives the value of the coin. Determine the maximum possible amount of money we can definitely win if we move first.
+ *
+ *
+ * http://n00tc0d3r.blogspot.com/2013/07/optimal-game-strategy-maximum-coin-value.html
+ * */
 public class CoinPlay {
 
     public static void main(String[] args) {
@@ -51,6 +58,7 @@ public class CoinPlay {
         //On the other hand, if the opponent takes Aj,
         // our maximum is P(i+1, j-1). Since the opponent is as smart as you,
         // he  would have chosen the choice that yields the minimum amount to you.
+        // So you get the minimal from c(i+2, j) or c(i+1, j-1) OR if you start from back then minimal of c(i, j-2) or c(i+1, j-1)
 
         int a = maxWinRecursive(coins, i + 2, j);
         int b = maxWinRecursive(coins, i + 1, j - 1);

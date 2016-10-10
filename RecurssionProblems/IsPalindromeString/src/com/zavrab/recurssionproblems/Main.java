@@ -17,33 +17,33 @@ public class Main {
         System.out.println("Is Palindrome: " + isPalindrome(s));
     }
 
-
-    static boolean isPalindrome(String strInput) {
+    public static boolean isPalindrome(String strInput) {
         if (strInput.length() <= 1) {
             return true;
         }
 
         String first = strInput.substring(0, 1);
         String last = strInput.substring(strInput.length() - 1);
+
         if (first.equalsIgnoreCase(last)) {
             return isPalindrome(strInput.substring(1, strInput.length() - 1));
         }
 
         if (ignore(first.charAt(0))) {
             return isPalindrome(strInput.substring(1));
-        } else if (ignore(last.charAt(0))) {
-            return isPalindrome(strInput.substring(0, strInput.length() -1));
-        } else {
-            return false;
         }
+        else if (ignore(last.charAt(0))) {
+            return isPalindrome(strInput.substring(0, strInput.length() -1));
+        }
+
+        return false;
     }
 
-    static boolean ignore(char c) {
+    private static boolean ignore(char c) {
         return (isPunctuation(c) || c == ' ');
     }
 
-    static boolean isPunctuation(char c) {
+    private static boolean isPunctuation(char c) {
         return c == '.' || c == ',' || c == '?' || c == '!' || c =='\'' || c == ';' || c == ':' || c == '"';
     }
-
 }

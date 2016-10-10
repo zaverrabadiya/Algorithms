@@ -26,11 +26,13 @@ public class TreeDiameter {
         if (root == null) {
             return -1;
         }
+
         return diameterRec(root).diameter;
     }
 
     private static DiameterReturnValue diameterRec(Node root) {
         DiameterReturnValue returnValue = new DiameterReturnValue();
+
         if (root.childs.size() == 0) {
             returnValue.diameter = 0;
             returnValue.distance = root.distanceFromFather;
@@ -39,6 +41,7 @@ public class TreeDiameter {
 
         returnValue.diameter = -1;
         int totalMaxDistance = 0, total2ndMaxDistance = 0;
+
         for (Node child : root.childs) {
             DiameterReturnValue currentReturnValue = diameterRec(child);
             returnValue.diameter = Math.max(currentReturnValue.diameter, returnValue.diameter);
@@ -53,6 +56,7 @@ public class TreeDiameter {
 
         returnValue.distance = totalMaxDistance + root.distanceFromFather;
         returnValue.diameter = Math.max(returnValue.diameter, (total2ndMaxDistance + totalMaxDistance));
+
         return returnValue;
     }
 

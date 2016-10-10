@@ -30,7 +30,8 @@ public class PossibleBTrees {
         for (int i = 1; i <= nodes; i++) {
             left = countTrees(i - 1); // Assign i-1 nodes to left, (i - 1) because one for root
             right = countTrees(nodes - i); // Assign nodes - i: total nodes - nodes assigned to left and root
-            sum += (left * right); // (left * right) because left subtree and right subtree constitutes only 1 tree
+            sum += (left * right); // (left * right) because left subtree and right subtree constitutes only 1 tree.
+                                    // e.g. left-subtree has 2 nodes and right-subtree has 3- so one on left treats as root and its child-2nd node on left and right-subtree with 3 nodes, thats one combination. then child-2nd node on right with right-subtree with 3 nodes, thats another combination... so each node on left-subtree be on left or right. so generating all possible combinations with right-subtree
         }
 
         return sum;

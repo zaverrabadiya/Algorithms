@@ -1,9 +1,12 @@
 package com.zavrab.dpproblems;
 
-import java.util.ArrayList;
-import java.util.List;
-
-// http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/
+/**
+ * And we can construct the solution in bottom up manner such that every filled entry has following property
+ * part[i][j] = true if a subset of {arr[0], arr[1], ..arr[j-1]} has sum equal to i, otherwise false
+ *
+ * http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/
+ *
+ * */
 
 public class BalancedPartitionSolution {
 
@@ -18,7 +21,6 @@ public class BalancedPartitionSolution {
     }
 
     public static boolean balancedPartition(int[] arr) {
-        List<Integer> partition = new ArrayList<Integer>();
         int sum = 0;
 
         for (int d : arr) {
@@ -29,10 +31,9 @@ public class BalancedPartitionSolution {
             return false;
         }
 
-        //boolean result = balancedPartitionRec(arr, arr.length - 1, sum / 2, partition);
+        //boolean result = balancedPartitionRec(arr, arr.length - 1, sum / 2);
 
-        boolean result = findPartition(arr, sum);
-        return result;
+        return findPartition(arr, sum);
     }
 
     // DP Solution
@@ -45,28 +46,39 @@ public class BalancedPartitionSolution {
             part[0][j] = true;
         }
 
-        for (i = 1; i <= sum/2; i++) {
-            for (j = 1; j <= n; j++) {
+        for (i = 1; i <= sum/2; i++) {  // SUM
+
+            for (j = 1; j <= n; j++) {  // Array element
+
+                // Carry forward the result of previous element for the same sum-- i
                 part[i][j] = part[i][j-1];
 
                 if (i >= arr[j-1]) {
+                    // Check the status of current sum - current element e.g. i = 3, element = 1 then see whats the status of 3-1 = sum-- 2
+                    // OR carry the status from previous element
                     part[i][j] = part[i][j] || part[(i - arr[j-1])][j-1];
                 }
             }
         }
 
+
+        // JUST FOR DEBUG PURPOSE =================
         System.out.println("Table for debug:");
+
         for (i = 0; i <= sum/2; i++) {
             for (j = 0; j <= n; j++) {
-                System.out.print(part[i][j] + " ");
+                System.out.print(part[i][j] + "\t");
             }
+
             System.out.println();
         }
+        // DEBUG END =================================
+
         return part[sum/2][n];
     }
 
     // RECURSIVE Solution
-    private static boolean balancedPartitionRec(int[] arr, int n, int sum, List<Integer> subSet) {
+    private static boolean balancedPartitionRec(int[] arr, int n, int sum) {
         if (sum == 0) {
             return true;
         }
@@ -75,14 +87,9 @@ public class BalancedPartitionSolution {
             return false;
         }
 
-        boolean one = balancedPartitionRec(arr, n - 1, sum, subSet);
+        boolean one = balancedPartitionRec(arr, n - 1, sum);
 
-        subSet.add(arr[n-1]);
-        boolean two = balancedPartitionRec(arr, n - 1, sum - arr[n - 1], subSet);
-
-        if (!two) {
-            subSet.remove(subSet.size() - 1);
-        }
+        boolean two = balancedPartitionRec(arr, n - 1, sum - arr[n]);
 
         return one || two;
     }

@@ -29,7 +29,7 @@ public class LcsSolution {
                 result = strX.charAt(i-1) + result;
                 i--;
                 j--;
-            } else if (cache[i - 1][j] > cache[i][j - 1]) {
+            } else if (cache[i-1][j] > cache[i][j-1]) {
                 i--;
             } else {
                 j--;
@@ -42,6 +42,7 @@ public class LcsSolution {
     public static int getLcsLengthIteratively(String strX, String strY) {
         int n = strX.length(), m = strY.length();
         int[][] cache = buildLcsMemoization(strX, strY, n, m);
+
         return cache[n][m];
     }
 
@@ -50,9 +51,11 @@ public class LcsSolution {
 
         for (int i = 1; i <= n; i++) { // Starting from 1, so i -1 and j -1 comparison won't go out of bound
             for (int j = 1; j <= m; j++) {
-               if (strX.charAt(i-1) == strY.charAt(j-1)) {
+
+                if (strX.charAt(i-1) == strY.charAt(j-1)) {
                     cache[i][j] = cache[i-1][j-1] + 1;
-                } else {
+                }
+                else {
                     cache[i][j] = Math.max(cache[i-1][j], cache[i][j-1]);
                 }
             }
@@ -74,9 +77,11 @@ public class LcsSolution {
 
         if (strX.charAt(n - 1) == strY.charAt(m - 1)) {
             return 1 + getLcsLengthRecursivelyInternal(strX.substring(0, n - 1), strY.substring(0, m - 1));
-        } else {
+        }
+        else {
             int maxX = getLcsLengthRecursivelyInternal(strX.substring(0, n - 1), strY);
             int maxY = getLcsLengthRecursivelyInternal(strX, strY.substring(0, m - 1));
+
             return Math.max(maxX, maxY);
         }
     }
@@ -89,11 +94,13 @@ public class LcsSolution {
         findSubsequence(strY, 0, setY, "");
 
         String lcs = "";
+
         for (String s : setX) {
             if (setY.contains(s) && s.length() > lcs.length()) {
                 lcs = s;
             }
         }
+
         return lcs;
     }
 

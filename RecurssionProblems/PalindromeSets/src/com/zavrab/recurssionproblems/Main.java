@@ -19,6 +19,7 @@ public class Main {
         // d|esse|r|t|s
         String input = "desserts";
         String[] result = palindromicDecomposition(input);
+
         for (String strings : result) {
             System.out.println(strings);
         }
@@ -33,6 +34,7 @@ public class Main {
         }
 
         decomposePalindrome(s, 0, new StringBuilder(), result);
+
         return result.toArray(new String[result.size()]);
     }
 
@@ -53,6 +55,7 @@ public class Main {
 
                 decomposePalindrome(s, i, partition, result);
 
+                // Remove string from current partition length - last substring + 1 for last '|' char
                 replaceStartAt = partition.length() - (subStr.length() + 1);
                 partition.replace(replaceStartAt, partition.length(), "");
             }

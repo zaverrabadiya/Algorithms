@@ -3,13 +3,12 @@ package com.zavrab.dpproblems;
 import java.util.ArrayList;
 import java.util.List;
 
-//http://stackoverflow.com/questions/2893470/generate-10-digit-number-using-a-phone-keypad
-// https://github.com/harishvc/challenges/blob/master/dp-knight-chess-movement
-
 /**
- * Created by ZaverR on 7/29/16.
- *
  * Total phone number formed using Knight tour constraint
+ *
+ * http://stackoverflow.com/questions/2893470/generate-10-digit-number-using-a-phone-keypad
+ * https://github.com/harishvc/challenges/blob/master/dp-knight-chess-movement
+ *
  */
 public class Solution {
 
@@ -93,20 +92,23 @@ public class Solution {
 
         int[] coordinates = new int[2];
 
-       for (int i = 0; i < pad.length; i++) {
-           for (int j = 0; j < pad[0].length; j++) {
-               if (pad[i][j] == val) {
+        for (int i = 0; i < pad.length; i++) {
+            for (int j = 0; j < pad[0].length; j++) {
+
+                if (pad[i][j] == val) {
                    coordinates[0] = i;
                    coordinates[1] = j;
+
                    return coordinates;
-               }
-           }
-       }
+                }
+            }
+        }
 
         return coordinates;
     }
 
     private static int[][] createPhonePad() {
+
         return new int[][] {
                 {1, 2, 3},
                 {4, 5, 6},

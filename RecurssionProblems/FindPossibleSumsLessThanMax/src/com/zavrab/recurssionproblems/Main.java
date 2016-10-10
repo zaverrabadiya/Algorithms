@@ -56,7 +56,7 @@ public class Main {
         // Keep adding same one at i
         recHelper(a, i, result, part, max);
 
-        // Add elements previous to ith (start from 0 to i)
+        // Add elements previous to ith (start from i to 0)
         while (i >= 0) {
             recHelper(a, i, result, part, max);
             i--;

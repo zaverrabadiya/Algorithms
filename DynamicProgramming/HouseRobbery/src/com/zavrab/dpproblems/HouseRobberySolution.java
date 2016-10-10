@@ -7,6 +7,8 @@ package com.zavrab.dpproblems;
  * A thief is going to steal the maximal value in these houses,
  * but he cannot steal in two adjacent houses because the owner of a stolen house will tell his two neighbors on the left and right side.
  * What is the maximal stolen value?
+ *
+ * Houses: {6, 1, 2, 7, 1}; // Output: 13
  * */
 public class HouseRobberySolution {
 
