@@ -43,6 +43,7 @@ public class RegexMatcher {
         if (i != s.length() && (s.charAt(i) == r.charAt(j) || r.charAt(j) == '.')) {
             return isMatching(s, r, i + 1, j + 1);
         }
+
         return false;
     }
 }

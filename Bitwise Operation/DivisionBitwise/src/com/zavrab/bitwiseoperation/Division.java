@@ -18,6 +18,7 @@ public class Division {
             result |= 1L << power;
             x -= yPower;
         }
+
         return result;
     }
 }

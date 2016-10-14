@@ -43,6 +43,7 @@ public class Main {
         if (inStr.length() < 4) {
             return;
         }
+
         System.out.println(inStr + ":");
 
         int n = 1 << inStr.length();  //e.g. len = 5 then n = 32
@@ -51,6 +52,7 @@ public class Main {
         for (int i = start + 1; i < n; i+=2) { // +2 so it keeps first and last bit intact e.g. 10001= 17, 10011 = 19, 11001 = 21 and so on
             int count = 0;
             String result = "";
+
             for (int j = 0; j < inStr.length(); j++) {
                 if ((i & (1 << j)) >= 1) {
                     String countStr = count > 1 ? "" + count : (count == 1)? "" + inStr.charAt(j - 1) : "";
@@ -60,6 +62,7 @@ public class Main {
                     ++count;
                 }
             }
+
             if (result.length() < inStr.length()) {
                 System.out.println(result);
             }

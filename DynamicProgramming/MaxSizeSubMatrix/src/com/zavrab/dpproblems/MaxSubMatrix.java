@@ -48,7 +48,7 @@ public class MaxSubMatrix {
             }
         }
 
-        // Find max, i where sub-matrix ends and j where sub-matrix ends
+        // Find max, i where sub-matrix row ends and j where sub-matrix column ends
         int max = 0, maxI = 0, maxJ = 0;
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {

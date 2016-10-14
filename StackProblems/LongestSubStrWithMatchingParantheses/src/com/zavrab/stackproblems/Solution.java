@@ -18,8 +18,9 @@ public class Solution {
 
     public static int maxLenMatchingParantheses(String inStr) {
         Stack<Integer> paranStack = new Stack<Integer>();
-        paranStack.push(-1);
         int len = 0;
+
+        paranStack.push(-1);
 
         for (int i = 0; i < inStr.length(); i++) {
             if (inStr.charAt(i) == '(') {

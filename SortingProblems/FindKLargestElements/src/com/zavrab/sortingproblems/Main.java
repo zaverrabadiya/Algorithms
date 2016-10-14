@@ -15,9 +15,10 @@ public class Main {
 
     public static int[] findKLargest(int[] arr, int topK) {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>(topK);
-
         int i = 1;
+
         priorityQueue.add(arr[0]);
+
         while (i < arr.length) {
             if (arr[i++] > priorityQueue.peek()) {
                 priorityQueue.add(arr[i]);
@@ -28,15 +29,17 @@ public class Main {
             }
         }
 
-        return convertPQToArray(priorityQueue, topK);
+        return convertPqToArray(priorityQueue, topK);
     }
 
-    private static int[] convertPQToArray(PriorityQueue<Integer> priorityQueue, int topK) {
+    private static int[] convertPqToArray(PriorityQueue<Integer> priorityQueue, int topK) {
         int[] output = new int[topK];
         int i = topK - 1;
+
         while (priorityQueue.size() > 0 ) {
             output[i--] = priorityQueue.poll();
         }
+
         return output;
     }
 }

@@ -30,6 +30,7 @@ public class Main {
         Arrays.sort(inArray);
 
         List<String> result = new ArrayList<String>();
+
         for (int i = 0; i < inArray.length - 2; i++) {
             if (i > 0 && inArray[i] == inArray[i - 1]) {
                 continue;
@@ -52,6 +53,7 @@ public class Main {
                     while (s < e && inArray[e] == inArray[e - 1]) {
                         e--;
                     }
+
                 } else if (inArray[s] + inArray[e] < negNumber) {
                     s++;
                 } else {
@@ -59,6 +61,7 @@ public class Main {
                 }
             }
         }
+
         return result.toArray(new String[result.size()]);
     }
 }

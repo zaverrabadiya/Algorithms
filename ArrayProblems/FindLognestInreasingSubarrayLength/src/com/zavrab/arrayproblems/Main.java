@@ -29,11 +29,13 @@ public class Main {
                 temp++;
             }
             else {
+                max = Math.max(max, temp);
                 temp = 1;
             }
-
-            max = Math.max(max, temp);
         }
+
+        // To cover last element temp increment
+        max = Math.max(max, temp);
 
         return max;
     }

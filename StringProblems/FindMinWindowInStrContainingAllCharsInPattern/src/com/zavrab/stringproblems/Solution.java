@@ -6,10 +6,12 @@ public class Solution {
 
     public static void main(String[] args) {
         System.out.println(findMinWindowWhichContainsAllCharsInPattern("ADOBECODEBANC", "ABC"));
+        System.out.println(findMinWindowWhichContainsAllCharsInPattern("ADOBECODEBANC", "BN"));
     }
 
     public static String findMinWindowWhichContainsAllCharsInPattern(String inStr, String pattern) {
-        int[] needToFind = prePopulateArray(pattern); //Count number of characters in pattern
+        //Count number of characters in pattern
+        int[] needToFind = prePopulateArray(pattern);
         int[] hasFound = new int[256];
         int i = 0, count = 0, minLen = Integer.MAX_VALUE, windowStartPos = -1, windowEndPos = -1;
 
@@ -24,13 +26,14 @@ public class Solution {
             // Increase current character count
             hasFound[currChar]++;
 
-            // Total character found
+            // Total character found, this check makes sure that only one repeating character does not lead to increasing the entire count
+            // e.g. "aaaaabbbcc" and "ac": without this check 'a' will bump up the whole count
             if (hasFound[currChar] <= needToFind[currChar]) {
                 count++;
             }
 
             // If found all the characters in pattern
-            if (count >= pattern.length()) {
+            if (count == pattern.length()) {
                 currChar = inStr.charAt(i);
 
                 // Advance the begin pointer till found characters are more than needed to find
@@ -39,10 +42,12 @@ public class Solution {
                     if (hasFound[currChar] > needToFind[currChar]) {
                         hasFound[currChar]--;
                     }
+
                     i++;
                     currChar = inStr.charAt(i);
                 }
 
+                // Update the minimum window-length
                 int windowLength = (j - i) + 1;
                 if (windowLength < minLen) {
                     minLen = windowLength;
@@ -52,6 +57,7 @@ public class Solution {
             }
         }
 
+        // If found valid start and end points then return the substring from start to end points
         if (windowStartPos != -1 && windowEndPos != -1) {
             return inStr.substring(windowStartPos, windowEndPos + 1);
         }

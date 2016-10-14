@@ -42,11 +42,11 @@ public class Solution {
 
     public static void findMinWeight(int[][] table, int[][] query) {
 
-        for (int i = 0; i < query.length; i++) {
+        for (int[] aQuery : query) {
             boolean[][] tracker = new boolean[table.length][table[0].length];
             int[][] cache = initCache(table.length, table[0].length);
 
-            int minWeight = findMinWeightRec(table, query[i][0], query[i][1], query[i][2], query[i][3], tracker, cache);
+            int minWeight = findMinWeightRec(table, aQuery[0], aQuery[1], aQuery[2], aQuery[3], tracker, cache);
 
             System.out.println(minWeight);
         }

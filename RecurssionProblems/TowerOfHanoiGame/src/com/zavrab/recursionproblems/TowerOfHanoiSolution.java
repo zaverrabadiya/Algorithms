@@ -30,6 +30,7 @@ public class TowerOfHanoiSolution {
 
         moveTower(disk, tower, new Stack<Integer>(), new Stack<Integer>());
     }
+
     private static void moveTower(int disk, Stack<Integer> src, Stack<Integer> dest, Stack<Integer> spare) {
         if (disk == 1) {
             // Just helper to move disk from source tower to destination tower

@@ -37,7 +37,20 @@ public class CoinPlay {
             }
         }
 
+        // Print table for DEBUG PURPOSE ONLY
+        printDebugTable(cache);
+
         return cache[0][n-1];
+    }
+
+    private static void printDebugTable(int[][] cache) {
+        for (int i = 0; i < cache.length; i++) {
+            for (int j = 0; j < cache[0].length; j++) {
+                System.out.print(cache[i][j] + "\t");
+            }
+
+            System.out.println();
+        }
     }
 
     // RECURSIVE Solution

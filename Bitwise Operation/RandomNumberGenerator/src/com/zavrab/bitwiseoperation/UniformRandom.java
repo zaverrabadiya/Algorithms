@@ -9,6 +9,7 @@ public class UniformRandom {
     public int random(int lowerBound, int upperBound) {
         int numberOfOutComes = upperBound - lowerBound + 1;
         int result;
+
         do {
             result = 0;
 
@@ -17,6 +18,7 @@ public class UniformRandom {
                 result = (result << 1) + zeroOneRandom;
             }
         } while (result >= numberOfOutComes);
+
         return result + lowerBound;
     }
 }

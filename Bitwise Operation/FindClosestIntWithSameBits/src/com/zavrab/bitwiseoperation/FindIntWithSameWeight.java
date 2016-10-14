@@ -9,7 +9,7 @@ public class FindIntWithSameWeight {
     //(X - result) should be minimum difference
     public static long findClosestIntWithSameBitCount(long x) {
         for (int i = 0; i <=63; i++) {
-            //Check if right most two bit differs
+            //Check if LSB differs
             if(((x >> i) & 1) != ((x >> (i+1)) & 1)){
                 //Swap bits- i and (i+1)
                 x ^= (1 << i) | (1 << (i + 1));

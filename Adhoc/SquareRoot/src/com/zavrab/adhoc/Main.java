@@ -13,7 +13,7 @@ public class Main {
     public static double sqrt(int a) {
         double start = 0;
         double end = a;
-        double e = 0.000001; /* e decides the accuracy level*/
+        double e = 0.000001; // e decides the accuracy level
         double mid = 0.0;
 
         while(end - start > e)

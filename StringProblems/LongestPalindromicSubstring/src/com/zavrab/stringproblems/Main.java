@@ -1,15 +1,21 @@
 package com.zavrab.stringproblems;
 
+import java.util.*;
+
+/**
+ * MANACHER'S SOLUTION
+ *
+ * Find longest palindromic string using Manacher's algorithm
+ *
+ *  "ababbaba" => "ababbaba"
+ * "bbabbaba" => "babbab"
+ * "desserts" => "esse"
+ * "banananobano" => "anana"
+ *
+ * */
 public class Main {
 
     public static void main(String[] args) {
-        // Find longest palindromic string using Manacher's algorithm
-        //e.g.
-        // "ababbaba" => "ababbaba"
-        // "bbabbaba" => "babbab"
-        // "desserts" => "esse"
-        // "banananobano" => "anana"
-
         String inStr = "banananobano";
 
         String maxPalindrome = findLongestPalindromicSubString(inStr);
@@ -17,7 +23,7 @@ public class Main {
     }
 
     public static String findLongestPalindromicSubString(String inStr) {
-        char[] charArray = convertToTempCharArry(inStr);
+        char[] charArray = convertToTempCharArray(inStr);
         int[] p = new int[charArray.length];
         int center = 1, rEdge = 1;
 
@@ -41,7 +47,7 @@ public class Main {
         return getSubstring(inStr, p);
     }
 
-    private static char[] convertToTempCharArry(String s) {
+    private static char[] convertToTempCharArray(String s) {
         char[] charArray = new char[s.length() * 2 + 3];
         charArray[0] = '@'; //Starting unique char
         int j = 1;

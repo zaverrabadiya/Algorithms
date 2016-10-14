@@ -17,15 +17,15 @@ public class LevenshteinDistance {
     public static void main(String[] args) {
         String strS = "kitten";
         String strT = "sitting";
-        System.out.println("Distance: " + levenshteinDistance(strS, strT));
+        System.out.println("\nDistance: " + levenshteinDistance(strS, strT));
 
         strS = "pizza";
         strT = "yolo";
-        System.out.println("Distance: " + levenshteinDistance(strS, strT));
+        System.out.println("\nDistance: " + levenshteinDistance(strS, strT));
     }
 
     public static int levenshteinDistance(String strS, String strT) {
-        //return distance(strS, strT, strS.length(), strT.length());
+        //return distanceRec(strS, strT, strS.length(), strT.length());
         return distanceDp(strS, strT);
     }
 
@@ -42,8 +42,8 @@ public class LevenshteinDistance {
 
         int[][] cache = new int[n+1][m+1];
 
-        for (int i = 0; i <= n; i++) {
-            for (int j = 0; j <= m; j++) {
+        for (int i = 0; i <= n; i++) { // Iterates String source
+            for (int j = 0; j <= m; j++) { // Iterates String target
 
                 // If first string is empty, only option is to
                 // insert all characters of second string
@@ -71,18 +71,14 @@ public class LevenshteinDistance {
             }
         }
 
-        // Memoization table output for debug
-//        for (int i = 0; i <= n; i++) {
-//            for (int j = 0; j <= m; j++) {
-//                System.out.print(" " + cache[i][j]);
-//            }
-//            System.out.println();
-//        }
+        // Print table for DEBUG PURPOSE ONLY
+        printDebugTable(cache);
+
         return cache[n][m];
     }
 
     // RECURSIVE Solution
-    private static int distance(String s, String t, int i, int j) {
+    private static int distanceRec(String s, String t, int i, int j) {
         if (i == 0) {
             return j;   // String a is empty, so needs to add j characters to a
         }
@@ -91,15 +87,25 @@ public class LevenshteinDistance {
             return i;   // String b is empty, so needs to remove i characters from a
         }
 
-        int cost = 0;
-        if (s.charAt(i -1) != t.charAt(j - 1)) {
-            cost = 1;
+        if (s.charAt(i -1) == t.charAt(j - 1)) {
+            return distanceRec(s, t, i-1, j-1);
         }
 
-        int delete = distance(s, t, i-1, j) + 1;
-        int insert = distance(s, t, i, j-1) + 1;
-        int replace = distance(s, t, i-1, j-1) + cost;
+        int delete = distanceRec(s, t, i-1, j);
+        int insert = distanceRec(s, t, i, j-1);
+        int replace = distanceRec(s, t, i-1, j-1);
 
-        return Math.min(Math.min(delete, insert), replace);
+        return 1 + Math.min(Math.min(delete, insert), replace);
+    }
+
+    private static void printDebugTable(int[][] cache) {
+        System.out.println("==============================");
+        for (int[] aCache : cache) {
+            for (int j : aCache) {
+                System.out.print(j + "\t");
+            }
+
+            System.out.println("");
+        }
     }
 }

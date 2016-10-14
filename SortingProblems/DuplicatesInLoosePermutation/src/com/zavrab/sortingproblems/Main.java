@@ -19,9 +19,11 @@ public class Main {
 
     public static int findDuplicateInLoosePermutation(int[] arr) {
         int i = 0;
+
         while (i < arr.length - 1) {
             if (arr[i] != i + 1) {
                 int actualIndexForThisElement = arr[i] - 1;
+
                 if (arr[i] == arr[actualIndexForThisElement]) { //Check if current element and the element at the curr element belongs are same
                     return arr[i]; //Found duplicate
                 } else {
@@ -31,6 +33,7 @@ public class Main {
                 i++;
             }
         }
+
         return -1;
     }
 

@@ -63,17 +63,18 @@ public class Main {
     }
 
     private static boolean isValid(Integer[] a, int pos) {
-        // Queens positions in diagonal up and down direction
+        // i represents row and x & y represent column
+        // Queens positions in diagonal left and right direction
         int x = a[pos] - 1, y = a[pos] + 1;
 
-        // As we go backward, check if current queen collides with any in diagonal up and down direction
+        // As we go backward, check if current queen collides with any in diagonal left and right direction
         for (int i = pos - 1; i >= 0; i--) {
             if (x == a[i] || y == a[i]) {
                 return false;
             }
 
-            x--; // Diagonal down
-            y++; // Diagonal up
+            x--; // Diagonal left
+            y++; // Diagonal right
         }
 
         return true;

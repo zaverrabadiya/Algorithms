@@ -7,6 +7,7 @@ public class Multiplication {
 
     public static long multiply(long x, long y) {
         long sum = 0;
+
         while(x != 0) {
             //Examines each bit of x
             if((x & 1) != 0) {
@@ -15,6 +16,7 @@ public class Multiplication {
             x >>= 1;
             y <<= 1;
         }
+
         return sum;
     }
 

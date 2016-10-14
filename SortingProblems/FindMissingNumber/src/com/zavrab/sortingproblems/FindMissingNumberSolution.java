@@ -25,6 +25,7 @@ public class FindMissingNumberSolution {
         // Then divide by 8 to get number of bytes
         byte[] bitSet = new byte[size]; // Store 8 bit
 
+        // Set each element to its corresponding index in bitset
         for (int i = 0; i < totalElements; i++) {
             int posInBitSet = inArr[i] / BIT_LENGTH; // Get index in bitset array
             int bitPos = inArr[i] % BIT_LENGTH;  // Get bit to turn ON in BitSet array
@@ -74,8 +75,10 @@ public class FindMissingNumberSolution {
         // Found the prefix, so now set bit for 2^16 suffix
         BIT_LENGTH = 32;
         bitSet = new int[size / BIT_LENGTH]; // Reset bitSet to free up old buckets
+
         for (int i = 0; i < inArr.length; i++) {
             int posInBitSet = inArr[i] / BIT_LENGTH; // Get index in bitset array
+
             if (posInBitSet == bitBucket) {
                 int bitPos = inArr[i] % BIT_LENGTH;  // Get bit to turn ON in BitSet array
                 bitSet[posInBitSet] |= (1 << bitPos);
