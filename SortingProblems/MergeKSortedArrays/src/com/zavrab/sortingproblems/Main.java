@@ -46,7 +46,7 @@ public class Main {
             // Add min element to the result
             output[s++] = minNode.val;
 
-            // Add next element to the queue from the same array that of Just extracted minimum element belongs to
+            // Add next element to the queue from the same array that of Just-extracted minimum element belongs to
             if (minNode.col < n-1) {
                 row = minNode.row;
                 col = minNode.col + 1;

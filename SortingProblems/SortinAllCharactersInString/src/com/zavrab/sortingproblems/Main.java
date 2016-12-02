@@ -26,6 +26,7 @@ public class Main {
         }
 
         result = getStringFromBuckets(buckets);
+
         return result;
     }
 
@@ -35,12 +36,14 @@ public class Main {
         for (int i = 0; i < buckets.length; i++) {
             result += listOfCharsToString(i, buckets[i]);
         }
+
         return result;
     }
 
     private static String listOfCharsToString(int ascii, int numberOfCharacters) {
         String str = "";
         char c = (char) ascii;
+
         for (int i = 0; i < numberOfCharacters; i++) {
             str += "" + c;
         }

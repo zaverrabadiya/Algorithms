@@ -35,7 +35,7 @@ public class Rotate2DArray {
 
         int arrLen = arr.length - 1;
 
-        // I takes layer by layer
+        // i takes layer by layer
         for (int i = 0; i < arr.length/2; i++) {
             for (int j = i; j < (arrLen - i); j++) {
 

@@ -27,11 +27,9 @@ public class ReverseBits {
         int WORD_SIZE = 16;
         createComputedTable();
 
-        return  precomputedReverse[(int)(x & BIT_MASK)] << (3 * WORD_SIZE)
-                | precomputedReverse[(int)((x >>> WORD_SIZE) & BIT_MASK)]
-                << (2 * WORD_SIZE)
-                | precomputedReverse[(int)((x >>> (2 * WORD_SIZE)) & BIT_MASK)]
-                << WORD_SIZE
+        return  (precomputedReverse[(int)(x & BIT_MASK)] << (3 * WORD_SIZE))
+                | (precomputedReverse[(int)((x >>> WORD_SIZE) & BIT_MASK)] << (2 * WORD_SIZE))
+                | (precomputedReverse[(int)((x >>> (2 * WORD_SIZE)) & BIT_MASK)] << WORD_SIZE)
                 | precomputedReverse[(int)((x >>> (3 * WORD_SIZE)) & BIT_MASK)];
     }
 

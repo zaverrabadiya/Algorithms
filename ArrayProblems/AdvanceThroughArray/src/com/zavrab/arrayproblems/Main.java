@@ -4,10 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
         int[] arr = new int[] {3, 3, 1, 0, 2, 0, 2};
-        System.out.println("Can reach to the end: " + canReadEnd(arr));
+        System.out.println("Can reach to the end: " + canReachEnd(arr));
 
         int[] arr2 = new int[] {3, 2, 0, 0, 2, 0, 1};
-        System.out.println("Can reach to the end: " + canReadEnd(arr2));
+        System.out.println("Can reach to the end: " + canReachEnd(arr2));
     }
 
     //Input A = {3, 3, 1, 0, 2, 0, 2} Output = true
@@ -15,7 +15,7 @@ public class Main {
 
     //Input A = {3, 2, 0, 0, 2, 0, 1} Output = false
     //A[0] to A[1] => A[3] which is 0 so stuck
-    public static boolean canReadEnd(int[] maxAdvanceSteps) {
+    public static boolean canReachEnd(int[] maxAdvanceSteps) {
         int furthestReachSoFar = 0, lastIndex = maxAdvanceSteps.length - 1;
 
         for(int i = 0; i <= furthestReachSoFar && furthestReachSoFar < lastIndex; i++) {

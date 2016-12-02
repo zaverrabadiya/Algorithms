@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Point point = new Main().new Point(3, 3);
+        Point point = new Point(3, 3);
         Point[] nearestPoints = findNearestPoints(generateAllPoints(), point, 2);
 
         for (Point p : nearestPoints) {
@@ -18,7 +18,7 @@ public class Main {
     public static Point[] findNearestPoints(Point[] allPoints, Point point, int kPoint) {
         PriorityQueue<Point> queueByDistance = new PriorityQueue<Point>(kPoint, Collections.reverseOrder());
 
-        Point fakePoint = new Main().new Point(Integer.MAX_VALUE, Integer.MAX_VALUE); //Adding fake, so first .peek() won't throw exception
+        Point fakePoint = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE); //Adding fake, so first .peek() won't throw exception
         fakePoint.setDistance(Integer.MAX_VALUE);
         queueByDistance.add(fakePoint);
 
@@ -34,6 +34,7 @@ public class Main {
                 }
             }
         }
+
         return getTopKPointsFromPQ(kPoint, queueByDistance);
     }
 
@@ -47,24 +48,26 @@ public class Main {
     private static Point[] getTopKPointsFromPQ(int kPoint, PriorityQueue<Point> allPoints) {
         Point[] nearestPoints = new Point[kPoint];
         int i = kPoint - 1;
+
         while (allPoints.size() > 0) {
             nearestPoints[i--] = allPoints.poll();
         }
+
         return nearestPoints;
     }
 
     private static Point[] generateAllPoints() {
         Point[] nPoints = new Point[5];
-        nPoints[0] = new Main().new Point(0, 6);
-        nPoints[1] = new Main().new Point(6, 0);
-        nPoints[2] = new Main().new Point(3, 2);
-        nPoints[3] = new Main().new Point(3, 6);
-        nPoints[4] = new Main().new Point(5, 3);
+        nPoints[0] = new Point(0, 6);
+        nPoints[1] = new Point(6, 0);
+        nPoints[2] = new Point(3, 2);
+        nPoints[3] = new Point(3, 6);
+        nPoints[4] = new Point(5, 3);
 
         return nPoints;
     }
 
-    private class Point implements Comparable {
+    private static class Point implements Comparable {
         int x;
         int y;
         double distance;

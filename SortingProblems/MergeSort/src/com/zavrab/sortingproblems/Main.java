@@ -35,11 +35,14 @@ public class Main {
         for (int i = s; i <= e; i++) {
             if (k > e) {
                 mergedArr[i] = arr[j++];
-            } else if (j > mid) {
+            }
+            else if (j > mid) {
                 mergedArr[i] = arr[k++];
-            } else if (arr[j] < arr[k]) {
+            }
+            else if (arr[j] < arr[k]) {
                 mergedArr[i] = arr[j++];
-            } else {
+            }
+            else {
                 mergedArr[i] = arr[k++];
             }
         }

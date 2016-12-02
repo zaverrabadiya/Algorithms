@@ -29,7 +29,7 @@ public class Main {
             return false;
         }
 
-        return isSumK(arr, s + 1, sum)  // Check if current-element itself is equal to given sum
+        return isSumK(arr, s + 1, sum)  // Skip the current-element
                 || isSumK(arr, s + 1, sum - arr[s]);  // Reduces the current-element from sum and picks next element in array
     }
 }

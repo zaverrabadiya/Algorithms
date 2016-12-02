@@ -65,9 +65,10 @@ public class Main {
     private static boolean isValid(Integer[] a, int pos) {
         // i represents row and x & y represent column
         // Queens positions in diagonal left and right direction
+        // The value in array a{} represents which column is occupied by queen e.g a {0, 2...} means 0th row has 0th col and 1st row has 2nd col occupied
         int x = a[pos] - 1, y = a[pos] + 1;
 
-        // As we go backward, check if current queen collides with any in diagonal left and right direction
+        // Start from one-previous row, As we go backward, check if current queen collides with any in diagonal left and right direction
         for (int i = pos - 1; i >= 0; i--) {
             if (x == a[i] || y == a[i]) {
                 return false;

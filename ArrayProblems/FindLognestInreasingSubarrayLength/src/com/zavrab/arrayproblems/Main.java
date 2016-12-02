@@ -1,7 +1,7 @@
 package com.zavrab.arrayproblems;
 
 /***
- * Find longest increasing SUB-ARRAY length (Don't be confuse with SUB-SEQUENCE)
+ * Find longest increasing SUB-ARRAY length (Don't be confused with SUB-SEQUENCE)
  *
  * A : {1, 6, 2, 4, 5} => 3
  * A : {1, 2, 4, 6, 8, 3} => 5

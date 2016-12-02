@@ -1,9 +1,9 @@
 package com.zavrab.bitwiseoperation;
 
-/*
+/**
  * @author Zaver R
  * Date: Feb 9, 2016
-*/
+ **/
 
 public class Main {
 
