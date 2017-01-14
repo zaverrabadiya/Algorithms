@@ -18,18 +18,21 @@ public class WordBreak {
         String sentence3 = "interviewkickstart";
         String[] dict3 = {"interview", "kick", "kstart", "kicks"};
 
-        //System.out.print("Result: " + wordBreakRec(word, dict));
+        String sentence4 = "catsdogcats";
+        String[] dict4 = {"cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat"};
 
-        String result[] = canBreakTheStringIntoWordsDp(sentence, dict);
-        if (result != null) {
-            System.out.println("Words broken from the given sentence: ");
+        System.out.print("Result: " + wordBreakRec(sentence4, dict4));
 
-            for (String word : result) {
-                System.out.print(word + " ");
-            }
-        } else {
-            System.out.println("Could not break the sentence into dictionary words!");
-        }
+//        String result[] = canBreakTheStringIntoWordsDp(sentence, dict);
+//        if (result != null) {
+//            System.out.println("Words broken from the given sentence: ");
+//
+//            for (String word : result) {
+//                System.out.print(word + " ");
+//            }
+//        } else {
+//            System.out.println("Could not break the sentence into dictionary words!");
+//        }
     }
 
     // DP Solution

@@ -25,7 +25,7 @@ public class Main {
     }
 
     public static void rearrange(int[] A, int pivotIndex) {
-        int i =0, j = 0, l = A.length-1;
+        int i = 0, j = 0, l = A.length-1;
         int pivot = A[pivotIndex];
 
         while(j <= l) {

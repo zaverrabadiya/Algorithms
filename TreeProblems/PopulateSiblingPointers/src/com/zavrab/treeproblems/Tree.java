@@ -40,9 +40,28 @@ public class Tree {
 
         root.nextRight = next;
 
-        joinSibling(root.left, root.right);
+        next = root.right;
+        if (root.right == null && root.nextRight != null) {
+            if (root.nextRight.left != null) {
+                next = root.nextRight.left;
+            } else {
+                next = root.nextRight.right;
+            }
+        }
 
-        next = (root.nextRight != null) ? root.nextRight.left : null;
+        // Recurse with next
+        joinSibling(root.left, next);
+
+        next = null;
+        if (root.nextRight != null) {
+            if (root.nextRight.left != null) {
+                next = root.nextRight.left;
+            } else {
+                next = root.nextRight.right;
+            }
+        }
+
+        // Recurse with next
         joinSibling(root.right, next);
     }
 

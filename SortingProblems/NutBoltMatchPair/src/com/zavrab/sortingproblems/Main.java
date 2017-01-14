@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args)
     {
         // Nuts and bolts are represented as array of characters, NO DUPLICATES
-        int[] nuts = new int[] {2, 5, 3, 4, 1, 3, 6};
+        int[] nuts = new int[] {3, 5, 3, 4, 1, 2, 6};
         int[] bolts = new int[] {5, 3, 2, 1, 3, 4, 6};
 
         // Method based on quick sort which matches nuts and bolts

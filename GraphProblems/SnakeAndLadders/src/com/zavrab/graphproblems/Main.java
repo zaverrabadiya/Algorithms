@@ -40,9 +40,10 @@ public class Main {
         Queue<Node> queue = new ArrayDeque<Node>();
 
         Node start = new Node();
+        Node curr = null;
+
         queue.add(start);
         visited[0] = true;
-        Node curr = start;
 
         while (!queue.isEmpty()) {
             curr = queue.poll();

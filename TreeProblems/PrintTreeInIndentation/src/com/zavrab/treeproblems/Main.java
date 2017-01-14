@@ -23,7 +23,7 @@ import java.util.Stack;
  * ---7
  * -4
  *
- * Its pre-order printing, where you have to pass the tabs counter along with recursive call
+ * Its PRE-ORDER printing, where you have to pass the tabs counter along with recursive call
  *
  *
  * Part-2: Build tree from given array of string; which is pre-order with number of tabs as prefix
@@ -55,8 +55,10 @@ public class Main {
             System.out.print("-");
         }
 
+        // Print node value
         System.out.println(curr.val);
 
+        // Recurse on child nodes
         for (Node child : curr.childs) {
             printTreeRecHelper(child, tabs+1);
         }
@@ -77,20 +79,20 @@ public class Main {
 
         while (i < a.length) {
             // Create new node from ith string in array
-            NodeWrapper nodeWrapper = new NodeWrapper(a[i++]);
+            NodeWrapper newNodeWrapper = new NodeWrapper(a[i++]);
 
-            // Remove the nodes till we find the node that has exactly 1 tab less than the newly create node
+            // Remove the nodes till we find the node that has exactly 1 tab less than the newly created node
             // 1 tab less meaning parent node has 1 tab less since it 1 level up than the child nodes
-            while (previousNodes.peek().tabs != nodeWrapper.tabs - 1) {
+            while (previousNodes.peek().tabs != newNodeWrapper.tabs - 1) {
                 previousNodes.pop();
             }
 
-            // Get the current node who is parent node of newly created node
-            NodeWrapper currWrapper = previousNodes.peek();
+            // Get the parent node for newly created node
+            NodeWrapper parentNodeWrapper = previousNodes.peek();
 
             // Add new node to the parent node
-            currWrapper.node.childs.add(nodeWrapper.node);
-            previousNodes.push(nodeWrapper);
+            parentNodeWrapper.node.childs.add(newNodeWrapper.node);
+            previousNodes.push(newNodeWrapper);
         }
 
         return rootWrapper.node;

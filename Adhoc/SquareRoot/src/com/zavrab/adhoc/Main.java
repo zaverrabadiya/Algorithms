@@ -22,7 +22,7 @@ public class Main {
             double estimate = mid * mid;
 
             if (estimate == a) {
-                return a;
+                return mid;
             }
             else if (estimate > a) {
                 end = mid;

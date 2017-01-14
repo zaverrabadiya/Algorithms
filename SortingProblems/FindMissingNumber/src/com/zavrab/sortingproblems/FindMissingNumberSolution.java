@@ -8,6 +8,7 @@ public class FindMissingNumberSolution {
 
     public static void main(String[] args) {
         int[] inArray = new int[] {2, 5, 4, 0, 1};
+
         System.out.println("Missing number is: " + findMissingNumber(inArray) + " (Assuming have 1 GB of memory)");
 
         System.out.println("Missing number is: " + findMissingNumber10MbMemory(inArray) + " (Assuming have only 10 MB of memory)");
@@ -73,7 +74,7 @@ public class FindMissingNumberSolution {
         }
 
         // Found the prefix, so now set bit for 2^16 suffix
-        BIT_LENGTH = 32;
+        BIT_LENGTH = 16;
         bitSet = new int[size / BIT_LENGTH]; // Reset bitSet to free up old buckets
 
         for (int i = 0; i < inArr.length; i++) {

@@ -33,8 +33,8 @@ public class TotalDistinctSubSequences {
         }
 
         // Actual algorithm to count the total sub-sequences of T
-        for (int i = 1; i <= s.length(); i++) {
-            for (int j = 1; j <= t.length(); j++) {
+        for (int i = 1; i <= s.length(); i++) { // Iterates through string S
+            for (int j = 1; j <= t.length(); j++) { // Iterates through string T
 
                 if (s.charAt(i-1) == t.charAt(j-1)) {
                     // Total of previous char in S and same char of T + previous char in S and previous char in T

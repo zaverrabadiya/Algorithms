@@ -44,7 +44,7 @@ public class FindIndicesOfAllAnagrams {
             // Increase found character count
             hasFound[c]++;
 
-            // Set left onl once when first character matches
+            // Set left only once when first character matches
             if (leftPosition == -1) {
                 leftPosition = i;
             }

@@ -25,7 +25,7 @@ public class Solution {
             max = 0;
 
             for (int j = i + 1; j < intArr.length; j++) {
-                // Check if a[i] < a[j] and a[j] > max: meaning get the max when traversing from i to j, so cache[i] can carry the max after it
+                // Check if a[i] < a[j] and cache[j] > max: meaning get the max when traversing from i to j, so cache[i] can carry the max after it
                 if (intArr[i] < intArr[j] && cache[j] > max) {
                     max = cache[j];
                 }

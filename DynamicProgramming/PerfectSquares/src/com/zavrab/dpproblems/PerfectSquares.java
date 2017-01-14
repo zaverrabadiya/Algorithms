@@ -36,7 +36,7 @@ public class PerfectSquares {
                 }
                 else if (i > square) {
                     // Get the minimum number of squares of current number-square 1...max
-                    // cache[5] = cache[4]+1 = 1+1=2 and cache[1]+1 = 1+1=2
+                    // cache[5] = cache[5]+1 = 1+1=2 and cache[number - square]+1 = 1+1=2
                     cache[i] = Math.min(cache[i], cache[i - square] + 1);
                 }
             }
