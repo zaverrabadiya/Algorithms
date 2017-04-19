@@ -21,18 +21,18 @@ public class WordBreak {
         String sentence4 = "catsdogcats";
         String[] dict4 = {"cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat"};
 
-        System.out.print("Result: " + wordBreakRec(sentence4, dict4));
+        System.out.print("Recursion- Result: " + wordBreakRec(sentence, dict) + "\n");
 
-//        String result[] = canBreakTheStringIntoWordsDp(sentence, dict);
-//        if (result != null) {
-//            System.out.println("Words broken from the given sentence: ");
-//
-//            for (String word : result) {
-//                System.out.print(word + " ");
-//            }
-//        } else {
-//            System.out.println("Could not break the sentence into dictionary words!");
-//        }
+        String result[] = canBreakTheStringIntoWordsDp(sentence, dict);
+        if (result != null) {
+            System.out.println("\nDP- Words broken from the given sentence: ");
+
+            for (String word : result) {
+                System.out.print(word + " ");
+            }
+        } else {
+            System.out.println("Could not break the sentence into dictionary words!");
+        }
     }
 
     // DP Solution
@@ -106,26 +106,23 @@ public class WordBreak {
         return wordBreakRecInternal(word, dictHashSet);
     }
 
-    private static String wordBreakRecInternal(String word, HashSet<String> dictionary) {
-        String partWord = "";
+    private static String wordBreakRecInternal(String text, HashSet<String> dictionary) {
+        StringBuilder word = new StringBuilder();
 
-        for (int i = 1; i <= word.length(); i++) {
-            partWord = word.substring(0, i);
+        for (int i = 0; i < text.length(); i++) {
+            word.append(text.charAt(i));
 
-            if (dictionary.contains(partWord)){
-                String result = wordBreakRecInternal(word.substring(i), dictionary);
+            if (dictionary.contains(word.toString())){
+                String result = wordBreakRecInternal(text.substring(i+1), dictionary);
 
                 if (result != null) {
-                    return partWord + " " + result;
+                    word.append(" ").append(result);
+                    return word.toString();
                 }
             }
         }
 
-        if (dictionary.contains(partWord)) {
-            return partWord;
-        }
-
-        return null;
+        return dictionary.contains(word.toString()) ? word.toString() : null;
     }
 
     // Only checks if string can be broken in dictionary words

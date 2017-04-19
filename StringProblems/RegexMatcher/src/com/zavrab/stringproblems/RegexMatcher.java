@@ -15,7 +15,7 @@ public class RegexMatcher {
         // "aa", "a*" => true
         // "aa", ".*" => true
         // "xy", ".*" => true
-        // "aab", "c*a*b" => true
+        // "aab", "c*a*b" => false
         // "aaaabc", "a*abc" => true
 
         System.out.print("Is Matching: " +  isMatching("aaaabc", "a*abc"));
@@ -29,19 +29,19 @@ public class RegexMatcher {
         }
     }
 
-    private static boolean isMatching(String s, String r, int i, int j) {
-        if (j == r.length()) {
-            return (i == s.length());
+    private static boolean isMatching(String text, String reg, int sIdx, int rIdx) {
+        if (rIdx == reg.length()) {
+            return (sIdx == text.length());
         }
 
-        if (j + 1 < r.length() && r.charAt(j + 1) == '*') { // Check if second char is '*'
-            return isMatching(s, r, i, j + 2) ||            // If second char is '*' then jump to char after '*' in REGEX, meaning Zero character matching from regex because i is staying at same position
-                    ((i != s.length() && (s.charAt(i) == r.charAt(j) || r.charAt(j) == '.'))
-                    && isMatching(s, r, i + 1, j));          // If second char is '*' and string-regex matches then jump to next char in String
+        if (rIdx + 1 < reg.length() && reg.charAt(rIdx + 1) == '*') { // Check if second char is '*'
+            return isMatching(text, reg, sIdx, rIdx + 2) ||            // If second char is '*' then jump to char after '*' in REGEX, meaning Zero character matching from regex because i is staying at same position
+                    ((sIdx != text.length() && (text.charAt(sIdx) == reg.charAt(rIdx) || reg.charAt(rIdx) == '.'))
+                    && isMatching(text, reg, sIdx + 1, rIdx));          // If second char is '*' and string-regex matches then jump to next char in String
         }
 
-        if (i != s.length() && (s.charAt(i) == r.charAt(j) || r.charAt(j) == '.')) {
-            return isMatching(s, r, i + 1, j + 1);
+        if (sIdx != text.length() && (text.charAt(sIdx) == reg.charAt(rIdx) || reg.charAt(rIdx) == '.')) {
+            return isMatching(text, reg, sIdx + 1, rIdx + 1);
         }
 
         return false;

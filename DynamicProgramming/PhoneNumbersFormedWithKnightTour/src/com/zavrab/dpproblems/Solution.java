@@ -11,6 +11,17 @@ import java.util.List;
  *
  */
 public class Solution {
+    
+    private static int[][] legalMoves = new int[][] {
+            {1, 2}, // Down right-right
+            {1, -2},// Down left-left
+            {2, 1}, // Down-down right
+            {2, -1},// Down-down left
+            {-1, 2},// Up right-right
+            {-1, -2},// Up left-left
+            {-2, 1}, // Up-up right
+            {-2, -1} // Up-up left
+    };
 
     public static int numPhoneNumbers(int startDigit, int phoneNumberLength) {
         int[][] phonePad = createPhonePad();
@@ -25,7 +36,7 @@ public class Solution {
         }
 
         if (cache[len][start] == 0) {
-            for (Integer nextMove : nextKnightMove(start, pad)) {
+            for (Integer nextMove : nextKnightMoveNew(start, pad)) {
                 cache[len][start] += numPhoneNumbers(pad, cache, len - 1, nextMove);
             }
         }
@@ -33,7 +44,7 @@ public class Solution {
         return  cache[len][start];
     }
 
-    private static List<Integer> nextKnightMove(int val, int[][] pad) {
+    private static List<Integer> nextKnightMoveNew(int val, int[][] pad) {
         List<Integer> nextMoves = new ArrayList<Integer>();
 
         int[] coordinates = getCoordinates(val, pad);
@@ -41,44 +52,13 @@ public class Solution {
         int i = coordinates[0];
         int j = coordinates[1];
 
-        // Down right
-        if (isValidMove(pad, i + 1, j + 2)) {
-            nextMoves.add(pad[i + 1][j + 2]);
-        }
+        for (int[] move : legalMoves) {
+            int row = i + move[0];
+            int col = j + move[1];
 
-        // Down left
-        if (isValidMove(pad, i + 1, j - 2)) {
-            nextMoves.add(pad[i + 1][j - 2]);
-        }
-
-        // Down-down right
-        if (isValidMove(pad, i + 2, j + 1)) {
-            nextMoves.add(pad[i + 2][j + 1]);
-        }
-
-        // Down-down left
-        if (isValidMove(pad, i + 2, j - 1)) {
-            nextMoves.add(pad[i + 2][j - 1]);
-        }
-
-        // Up right
-        if (isValidMove(pad, i - 1, j + 2)) {
-            nextMoves.add(pad[i - 1][j + 2]);
-        }
-
-        // Up left
-        if (isValidMove(pad, i - 1, j - 2)) {
-            nextMoves.add(pad[i - 1][j - 2]);
-        }
-
-        // Up-up right
-        if (isValidMove(pad, i - 2, j + 1)) {
-            nextMoves.add(pad[i - 2][j + 1]);
-        }
-
-        // Up-up left
-        if (isValidMove(pad, i - 2, j - 1)) {
-            nextMoves.add(pad[i - 2][j - 1]);
+            if (isValidMove(pad, row, col)) {
+                nextMoves.add(pad[row][col]);
+            }
         }
 
         return nextMoves;

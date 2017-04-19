@@ -26,11 +26,7 @@ public class MinStack {
     public static void push(int val) {
         stack.push(val);
 
-        if (minStack.size() > 0) {
-            if (val < minStack.peek()) {
-                minStack.push(val);
-            }
-        } else {
+        if (minStack.size() == 0 || val < minStack.peek()) {
             minStack.push(val);
         }
     }

@@ -55,7 +55,7 @@ public class BalancedPartitionSolution {
 
                 if (i >= arr[j-1]) {
                     // Check the status of current sum - current element e.g. i = 3, element = 1 then see whats the status of 3-1 = sum-- 2
-                    // part[i - currentElement][j-1]: here j -1 in result table to make sure that sum was true with elements before the current element
+                    // part[i - currentElement][j-1]: here j-1 in result table to make sure that sum was true with elements before the current element
                     //e.g sum:3 element:1 means see if we have sum 2 within 0..j-1  elements
                     // OR carry the status from previous element
 

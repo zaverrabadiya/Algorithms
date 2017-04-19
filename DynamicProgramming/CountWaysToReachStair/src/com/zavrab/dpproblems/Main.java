@@ -49,8 +49,4 @@ public class Main {
 
         return ways;
     }
-
-
-
-
 }

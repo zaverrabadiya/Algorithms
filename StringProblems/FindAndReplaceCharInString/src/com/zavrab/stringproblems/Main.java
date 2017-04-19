@@ -1,9 +1,13 @@
 package com.zavrab.stringproblems;
 
+/**
+ * Replace 'a' with 'zz' and remove 'b' rest characters stay as it is
+ *
+ * */
 public class Main {
 
     public static void main(String[] args) {
-        String input = "aabb";
+        String input = "aabcd";
         String result = addRemoveCharacters(input);
         System.out.print(result);
     }
@@ -12,17 +16,14 @@ public class Main {
         int len = findRequiredLength(inStr);
         char[] chars = new char[len];
 
-        int i = 0, j = 0;
+        int j = 0;
 
-        while (i < inStr.length()) {
+        for (int i = 0; i < inStr.length(); i++) {
             if (inStr.charAt(i) == 'a') {
                 chars[j++] = 'z';
                 chars[j++] = 'z';
-                i++;
             } else if (inStr.charAt(i) != 'b') {
-                chars[j++] = inStr.charAt(i++);
-            } else {
-                i++;
+                chars[j++] = inStr.charAt(i);
             }
         }
 

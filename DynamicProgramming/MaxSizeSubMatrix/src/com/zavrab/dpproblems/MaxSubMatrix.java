@@ -43,7 +43,7 @@ public class MaxSubMatrix {
             for (int j = 1; j < c; j++) {
 
                 if (mtx[i][j] == 1) {
-                    s[i][j] = Math.min(s[i][j - 1], Math.min(s[i - 1][j - 1], s[i - 1][j])) + mtx[i][j];
+                    s[i][j] = mtx[i][j] + Math.min(s[i][j - 1], Math.min(s[i - 1][j - 1], s[i - 1][j]));
                 }
             }
         }

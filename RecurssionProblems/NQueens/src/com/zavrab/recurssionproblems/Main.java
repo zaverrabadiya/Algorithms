@@ -29,12 +29,12 @@ public class Main {
         }
 
         List<Integer[]> result = new ArrayList<Integer[]>();
-        findNQueenPositions(queens, 0, result);
+        findNQueenPositionsRec(queens, 0, result);
 
         return  result;
     }
 
-    private static void findNQueenPositions(Integer[] queens, int pos, List<Integer[]> result) {
+    private static void findNQueenPositionsRec(Integer[] queens, int pos, List<Integer[]> result) {
 
         if (pos == queens.length - 1) {
             if (isValid(queens, pos)) {
@@ -49,7 +49,7 @@ public class Main {
             swap(queens, pos, j);
 
             if (isValid(queens, pos)) {
-                findNQueenPositions(queens, pos + 1, result);
+                findNQueenPositionsRec(queens, pos + 1, result);
             }
 
             swap(queens, j, pos);
