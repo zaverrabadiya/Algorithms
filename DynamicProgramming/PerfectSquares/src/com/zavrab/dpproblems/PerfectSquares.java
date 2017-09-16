@@ -23,11 +23,13 @@ public class PerfectSquares {
     }
 
     public static int findNumberOfSquares(int n) {
-        int max = (int)Math.sqrt(n);
+        int max;
         int[] cache = new int[n+1];
         Arrays.fill(cache, Integer.MAX_VALUE);
 
         for (int i = 1; i <= n; i++) {
+            max = (int)Math.sqrt(i); //Get sqrt of current number
+
             for (int j = 1; j <= max; j++) {
                 int square = j * j;
 

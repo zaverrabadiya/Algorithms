@@ -39,16 +39,15 @@ public class BalancedPartitionSolution {
     // DP Solution
     private static boolean findPartition(int[] arr, int sum) {
         int n = arr.length;
-        int i, j;
         boolean[][] part = new boolean[(sum/2)+1][n+1];
 
-        for (j = 0; j <= n; j++) {
+        for (int j = 0; j <= n; j++) {
             part[0][j] = true;
         }
 
-        for (i = 1; i <= sum/2; i++) {  // SUM
+        for (int i = 1; i <= sum/2; i++) {  // SUM
 
-            for (j = 1; j <= n; j++) {  // Array element
+            for (int j = 1; j <= n; j++) {  // Array element
 
                 // Carry forward the result of previous element for the same sum-- i
                 part[i][j] = part[i][j-1];
@@ -68,8 +67,8 @@ public class BalancedPartitionSolution {
         // JUST FOR DEBUG PURPOSE =================
         System.out.println("Table for debug:");
 
-        for (i = 0; i <= sum/2; i++) {
-            for (j = 0; j <= n; j++) {
+        for (int i = 0; i <= sum/2; i++) {
+            for (int j = 0; j <= n; j++) {
                 System.out.print(part[i][j] + "\t");
             }
 

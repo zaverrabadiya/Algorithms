@@ -85,33 +85,4 @@ public class LcsSolution {
             return Math.max(maxX, maxY);
         }
     }
-
-    // Find Longest Common Subsequence : NAIVE but 2^N
-    public static String getLcsNaive(String strX, String strY) {
-        HashSet<String> setX = new HashSet<String>();
-        HashSet<String> setY = new HashSet<String>();
-        findSubsequence(strX, 0, setX, "");
-        findSubsequence(strY, 0, setY, "");
-
-        String lcs = "";
-
-        for (String s : setX) {
-            if (setY.contains(s) && s.length() > lcs.length()) {
-                lcs = s;
-            }
-        }
-
-        return lcs;
-    }
-
-    private static void findSubsequence(String strInput, int start, HashSet<String> set, String partialSet) {
-        if (start == strInput.length()) {
-            set.add(partialSet);
-            return;
-        }
-
-        findSubsequence(strInput, start + 1, set, partialSet);
-        partialSet += strInput.charAt(start);
-        findSubsequence(strInput, start + 1, set, partialSet);
-    }
 }

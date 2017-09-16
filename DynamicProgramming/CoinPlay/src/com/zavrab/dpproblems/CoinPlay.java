@@ -13,7 +13,6 @@ public class CoinPlay {
 
     public static void main(String[] args) {
         int[] coins = new int[] {8, 15, 3, 7};
-
         //System.out.print("Result: " + maxWinRecursive(coins));
         System.out.print("Result: " + maxWin(coins));
     }

@@ -36,4 +36,20 @@ public class PossibleBTrees {
 
         return sum;
     }
+
+    //DP SOLUTION
+    public static int countTreesDp(int n) {
+        int[] cache = new int[n+1];
+        cache[0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                int left = cache[j - 1];
+                int right = cache[i - j];
+                cache[i] += left * right;
+            }
+        }
+
+        return cache[n];
+    }
 }

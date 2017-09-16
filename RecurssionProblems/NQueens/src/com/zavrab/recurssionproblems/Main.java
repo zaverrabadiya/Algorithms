@@ -36,11 +36,11 @@ public class Main {
 
     private static void findNQueenPositionsRec(Integer[] queens, int pos, List<Integer[]> result) {
 
-        if (pos == queens.length - 1) {
-            if (isValid(queens, pos)) {
+        if (pos == queens.length) {
+            //if (isValid(queens, pos)) {
                 Integer[] temp = queens.clone();
                 result.add(temp);
-            }
+            //}
 
             return ;
         }

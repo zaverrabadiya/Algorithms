@@ -9,9 +9,10 @@ public class Solution {
         //int[] input = {-7, 10, 9, 2, 3, 8, 8, 1};
         int[] input = {1, 10, 9, 2, 3, 4, 5};
 
-        int length = lisWithCacheIteratively(input);
-        //int length = lisWithCache(input);
-        //int length = findLongestIncreasingSubsequence(input);
+        int length;
+        length = lisWithCacheIteratively(input);
+        //length = lisWithCache(input);
+        //length = findLongestIncreasingSubsequenceRECURSIVELY(input);
 
         System.out.print("Longest increasing subsequence length: " + length);
     }
@@ -71,8 +72,13 @@ public class Solution {
     }
 
     // Recursive ===================================================================
-    public static int findLongestIncreasingSubsequence(int[] intArr) {
-        return lis(intArr, 0);
+    public static int findLongestIncreasingSubsequenceRECURSIVELY(int[] intArr) {
+        int max = 1;
+        for (int i = 0; i < intArr.length; i++) {
+            int ans = lis(intArr, i);
+            max = Math.max(ans, max);
+        }
+        return max;
     }
 
     private static int lis(int[] intArr, int start) {
