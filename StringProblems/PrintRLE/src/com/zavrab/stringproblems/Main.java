@@ -13,7 +13,7 @@ public class Main {
         String input = "batch";
 
         printRle(input);
-        //printRLEIteratively(input);
+//        printRLEIteratively(input);
     }
 
     //RECURSIVE Solution
@@ -22,24 +22,30 @@ public class Main {
             return;
         }
 
-        printRle(str, 1, str.length()-1);
+        printRle(str, "" + str.charAt(0), 0, 1);
     }
 
-    private static void printRle(String str, int s, int e) {
-        if (s > (e - 2)) {
+    private static void printRle(String s, String pre, int count, int i) {
+        String countStr = count > 1 ? "" + count : (count == 1) ? "" + s.charAt(i - 1) : "";
+
+        String result = pre + countStr + s.charAt(i);
+
+        if (i == s.length() - 1) {
+            if (result.length() < s.length()) {
+                System.out.println(result);
+            }
+
             return;
         }
 
-        String result = str.substring(0, s) + (e-s) + str.substring(e);
+        printRle(s, pre, count + 1, i + 1);
 
-        System.out.println(result);
-
-        printRle(str, s + 1, e);
-        printRle(str, s, e-1);
+        // Recurse with previous result and reset count to 0 to start new counter for rest of the string.
+        printRle(s, result , 0, i + 1);
     }
 
     // ITERATIVE Solution
-    public static void printRLEIteratively(String inStr) {
+    private static void printRLEIteratively(String inStr) {
         if (inStr.length() < 4) {
             return;
         }
