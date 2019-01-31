@@ -50,9 +50,10 @@ public class Main {
 
             number += currNum;
         }
+
         return number;
     }
-    
+
     private static HashMap<Character, Integer> prePopulateMap() {
         HashMap<Character, Integer> rToIMap = new HashMap<Character, Integer>();
         rToIMap.put('I', 1);

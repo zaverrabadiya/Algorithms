@@ -1,5 +1,9 @@
 package com.zavrab.stringproblems;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -12,8 +16,9 @@ public class Main {
 
         String input = "batch";
 
-        printRle(input);
+//        printRle(input);
 //        printRLEIteratively(input);
+        generate();
     }
 
     //RECURSIVE Solution
@@ -72,6 +77,29 @@ public class Main {
             if (result.length() < inStr.length()) {
                 System.out.println(result);
             }
+        }
+    }
+
+    private static Set<String> dictionary = new HashSet<String> (){{
+        add("bats");
+        add("beds");
+        add("bees");
+    }};
+
+    private static void generate() {
+        generate("b", 's', 0, 2);
+    }
+
+    private static void generate(String pre, char last, int i, int n) {
+        if (i == n) {
+            final String word = pre + last;
+            if (dictionary.contains(word))
+                System.out.println(word);
+            return;
+        }
+
+        for (int j = 0; j < 26; j++) {
+            generate(pre + ((char)(j + 'a')), last, i + 1, n);
         }
     }
 }

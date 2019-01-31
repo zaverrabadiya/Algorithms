@@ -34,11 +34,11 @@ public class Tree {
                 returnValue.isUnival = true;
                 returnValue.count += 1; // Include subtree formed from current root
             }
-            else if (root.left == null && root.right != null && root.val == root.right.val) {
+            else if (root.left == null && root.val == root.right.val) {
                 returnValue.isUnival = true;
                 returnValue.count += 1; // Include subtree formed from current root
             }
-            else if (root.right == null && root.left != null && root.val == root.left.val) {
+            else if (root.right == null && root.val == root.left.val) {
                 returnValue.isUnival = true;
                 returnValue.count += 1;  // Include subtree formed from current root
             }
@@ -65,7 +65,6 @@ public class Tree {
         root.left.left = new Node(5);
         root.left.right = new Node(5);
 
-        root.right.left = new Node(5);
         root.right.right = new Node(5);
 
         return root;
