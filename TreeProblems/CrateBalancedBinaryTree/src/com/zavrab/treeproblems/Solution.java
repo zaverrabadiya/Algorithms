@@ -45,33 +45,28 @@ public class Solution {
     }
 
     private static void traverseBFS(List<Node> queue) {
-        if (queue == null || queue.isEmpty()) {
-            return;
-        }
 
-        Node node = queue.remove(0);
+        while (queue != null && queue.size() > 1) {
 
-        if (node == null) {
-            queue.add(null);
-            node = queue.remove(0);
+            Node node = queue.remove(0);
 
-            if (queue.isEmpty()) {
-                return;
+            if (node == null) {
+                queue.add(null);
+                node = queue.remove(0);
+
+                System.out.println();
             }
-            System.out.println();
+
+            System.out.print(node.val + " ");
+
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+
+            if (node.right != null) {
+                queue.add(node.right);
+            }
         }
-
-        System.out.print(node.val + " ");
-
-        if (node.left != null) {
-            queue.add(node.left);
-        }
-
-        if (node.right != null) {
-            queue.add(node.right);
-        }
-
-        traverseBFS(queue);
     }
 
     private static class Node {
