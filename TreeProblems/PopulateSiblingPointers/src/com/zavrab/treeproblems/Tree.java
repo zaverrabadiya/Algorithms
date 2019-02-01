@@ -1,5 +1,9 @@
 package com.zavrab.treeproblems;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
 /**
  * Created by ZaverR on 7/12/16.
  */
@@ -13,7 +17,8 @@ public class Tree {
     }
 
     public void populateSiblingPointers(Node root) {
-        joinSibling(root, null);
+//        joinSibling(root, null);
+        joinSiblingIteratively(root);
     }
 
     public void printBfsUsingNextPointer(Node root) {
@@ -29,6 +34,31 @@ public class Tree {
                 System.out.println();
                 curr = leftMost.left;
                 leftMost = leftMost.left;
+            }
+        }
+    }
+
+    private void joinSiblingIteratively(final Node root) {
+        final List<Node> queue = new ArrayList<>();
+        queue.add(root);
+        queue.add(null);
+
+        while (queue.size() > 1) {
+            final Node n = queue.remove(0);
+
+            if (n == null) {
+                queue.add(null);
+                continue;
+            }
+
+            n.nextRight = queue.get(0);
+
+            if (n.left != null) {
+                queue.add(n.left);
+            }
+
+            if (n.right != null) {
+                queue.add(n.right);
             }
         }
     }
