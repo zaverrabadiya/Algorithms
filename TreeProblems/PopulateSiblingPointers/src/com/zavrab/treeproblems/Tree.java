@@ -2,43 +2,44 @@ package com.zavrab.treeproblems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  * Created by ZaverR on 7/12/16.
  */
 public class Tree {
 
-    private Node root;
+    public Node createTree() {
+        /*
+         *         1
+         *        / \
+         *       2   3
+         *      / \   \
+         *     4   5   6
+         *    /         \
+         *   7           8
+         *    \
+         *     9
+         *
+         * */
 
-    public Node createBalancedBst(int[] intArr){
-        //Constructs the tree from given array
-        return createTree(intArr);
+        final Node root = new Node(1);
+
+        root.left = new Node(2);
+        root.right = new Node(3);
+
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.right = new Node(6);
+
+        root.left.left.left = new Node(7);
+        root.right.right.right = new Node(8);
+
+        root.left.left.left.right = new Node(9);
+
+        return root;
     }
 
-    public void populateSiblingPointers(Node root) {
-//        joinSibling(root, null);
-        joinSiblingIteratively(root);
-    }
-
-    public void printBfsUsingNextPointer(Node root) {
-        Node curr = root;
-        Node leftMost = curr;
-
-        while (curr != null) {
-            System.out.print(curr.val + " ");
-
-            if (curr.nextRight != null) {
-                curr = curr.nextRight;
-            } else {
-                System.out.println();
-                curr = leftMost.left;
-                leftMost = leftMost.left;
-            }
-        }
-    }
-
-    private void joinSiblingIteratively(final Node root) {
+    public void populateSiblingPointers(final Node root) {
         final List<Node> queue = new ArrayList<>();
         queue.add(root);
         queue.add(null);
@@ -63,61 +64,20 @@ public class Tree {
         }
     }
 
-    private void joinSibling(Node root, Node next) {
-        if (root == null) {
-            return;
-        }
+    public void printBfsUsingNextPointer(final Node root) {
+        Node curr = root;
+        Node first = curr;
 
-        root.nextRight = next;
+        while (curr != null) {
+            System.out.print(curr.val + " ");
 
-        next = root.right;
-        if (root.right == null && root.nextRight != null) {
-            if (root.nextRight.left != null) {
-                next = root.nextRight.left;
+            if (curr.nextRight != null) {
+                curr = curr.nextRight;
             } else {
-                next = root.nextRight.right;
+                System.out.println();
+                curr = first.left != null ? first.left : first.right;
+                first = curr;
             }
         }
-
-        // Recurse with next
-        joinSibling(root.left, next);
-
-        next = null;
-        if (root.nextRight != null) {
-            if (root.nextRight.left != null) {
-                next = root.nextRight.left;
-            } else {
-                next = root.nextRight.right;
-            }
-        }
-
-        // Recurse with next
-        joinSibling(root.right, next);
-    }
-
-    private Node createTree(int[] arr) {
-        root = new Node(arr[0]);
-
-        for (int i = 1; i < arr.length; i++) {
-           root = insert(arr[i], root);
-        }
-
-        return root;
-    }
-
-    private Node insert(int val, Node root) {
-
-        if (root == null) {
-            return new Node(val);
-        } else {
-
-            if (val < root.val) {
-                root.left = insert(val, root.left);
-            } else {
-                root.right = insert(val, root.right);
-            }
-        }
-
-        return root;
     }
 }
