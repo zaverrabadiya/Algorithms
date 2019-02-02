@@ -22,26 +22,26 @@ public class Main {
             return;
         }
 
-        Node currNode = root;
         Node lastNode = null;
         Stack<Node> nodeStack = new Stack<Node>();
         nodeStack.push(root);
 
         while (!nodeStack.isEmpty()) {
-            if (currNode.left != null && currNode.left != lastNode && currNode.right != lastNode) {
-                currNode = currNode.left;
-                nodeStack.push(currNode);
-            }
-            else if (currNode.right != null && currNode.right != lastNode){
-                currNode = currNode.right;
-                nodeStack.push(currNode);
-            }
-            else {
-                lastNode = nodeStack.pop();
-                System.out.print(lastNode.val + " ");
+            final Node currNode = nodeStack.peek();
 
-                if (!nodeStack.isEmpty()) {
-                    currNode = nodeStack.peek();
+            if ((currNode.left == null && currNode.right == null) ||
+                    currNode.left == lastNode || currNode.right == lastNode) {
+
+                System.out.print(currNode.val + " ");
+
+                lastNode = nodeStack.pop();
+            } else {
+                if (currNode.right != null){
+                    nodeStack.push(currNode.right);
+                }
+
+                if (currNode.left != null){
+                    nodeStack.push(currNode.left);
                 }
             }
         }
