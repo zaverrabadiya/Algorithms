@@ -2,6 +2,7 @@ package com.zavrab.treeproblems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Part-1: Print tree with indentation; where number of tab represents level of node in tree
@@ -35,86 +36,87 @@ public class Main {
 	    Node root = createTree();
         printTreeInIndentation(root);
 
-        String[] a = new String[] {"1", "-2", "-3", "--5", "--6", "---7", "-4"};
-        //Node newTree = buildTree(a);
+        String[] a = new String[] {"-1", "--2", "--3", "---5", "---6", "----7", "--4"};
         Node newTree = buildTree(a);
         Node r = newTree;
     }
 
     // Print tree with indentation
     public static void printTreeInIndentation(Node root) {
-        printTreeRecHelper(root, 0);
+        printTreeRecHelper(root, "-");
     }
 
-    private static void printTreeRecHelper(Node curr, int tabs) {
+    private static void printTreeRecHelper(Node curr, String tabs) {
         if (curr == null) {
             return;
         }
 
-        // Print number of tabs
-        for (int t = 1; t <= tabs; t++) {
-            System.out.print("-");
-        }
-
         // Print node value
-        System.out.println(curr.val);
+        System.out.println(tabs + curr.val);
 
         // Recurse on child nodes
         for (Node child : curr.childs) {
-            printTreeRecHelper(child, tabs+1);
+            printTreeRecHelper(child, tabs + "-");
         }
     }
 
     // Build tree from given array of string: where string has tab(s) and value
-    static int j = 1;
     public static Node buildTree(String[] strs) {
         if (strs == null || strs.length == 0) {
             return null;
         }
 
-        Node root = new Node(getValue(strs[0]));
+        // Add each node into this stack
+        final Stack<NodeWrapper> stack = new Stack<>();
+        final Node root  = new Node(getValue(strs[0]));
+        stack.push(new NodeWrapper(root, 1));
 
-        buildTreeRec(strs, 0, root);
+        for (int i = 1; i < strs.length; i++) {
+            final int tabs = getNumberOfTabs(strs[i]);
+
+            // Remove node(s) till we find parent of the node we are going to create
+            while (!stack.isEmpty() && stack.peek().tabs >= tabs) {
+                stack.pop();
+            }
+
+            final Node child = new Node(getValue(strs[i]));
+            stack.peek().node.childs.add(child);
+
+            final NodeWrapper nodeWrapper = new NodeWrapper(child, tabs);
+            stack.push(nodeWrapper);
+        }
+
         return root;
     }
 
-    // The idea is to check if node at i is parent of current node j, if so then set i to j and start searching for node ith childrens
-    private static void buildTreeRec(String[] strs, int i, Node root) {
-        while (j < strs.length && getNumberOfTabs(strs[i]) == getNumberOfTabs(strs[j]) - 1) {
-            Node child = new Node(getValue(strs[j]));
-            root.childs.add(child);
+    private static class NodeWrapper {
+        final Node node;
+        final int tabs;
 
-            int start = j;
-            j++;
-
-            buildTreeRec(strs, start, child);
+        NodeWrapper(final Node node, final int tabs) {
+            this.node = node;
+            this.tabs = tabs;
         }
     }
 
     // UTIL methods
     private static int getValue(String s) {
-        StringBuilder value = new StringBuilder();
+        final StringBuilder value = new StringBuilder();
+        int i = s.length() - 1;
 
-        for (int i = s.length()-1; i >= 0; i--) {
-            if(isDigit(s.charAt(i))) {
-                value.append(s.charAt(i));
-            } else {
-                break;
-            }
+        while (i >= 0 && isDigit(s.charAt(i))) {
+            value.append(s.charAt(i--));
         }
 
         return Integer.parseInt(value.reverse().toString());
     }
 
     private static int getNumberOfTabs(String s) {
-        int tabs = 0, i = 0;
+        int i = 0;
 
-        while (i < s.length() && s.charAt(i) == '-') {
-            tabs++;
-            i++;
-        }
+        while (i < s.length() && s.charAt(i++) == '-');
 
-        return tabs;
+        return i + 1;
     }
 
     private static boolean isDigit(char c) {
