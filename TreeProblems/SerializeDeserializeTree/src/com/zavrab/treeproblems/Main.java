@@ -47,34 +47,32 @@ public class Main {
     public static Node deserializeTree(String data) {
         if (data == null || data.length() == 0) return  null;
 
-        String[] parts = data.split(",");
-        Queue<Node> q = new LinkedList<Node>();
+        final String[] parts = data.split(",");
         int i = 1;
-        Node root = new Node(getValue(parts[0]));
+
+        final Queue<Node> q = new LinkedList<Node>();
+        final Node root = createNode(parts[0]);
         q.add(root);
 
-        while (i < parts.length - 2) {
-            Node n = q.remove();
+        while (!q.isEmpty()) {
+            final Node n = q.poll();
 
-            int leftVal = getValue(parts[i]);
-            if (leftVal != Integer.MIN_VALUE) {
-                Node left = new Node(leftVal);
+            final Node left = createNode(parts[i++]);
+            final Node right = createNode(parts[i++]);
+
+            n.left = left;
+            n.right = right;
+
+            if (left != null)
                 q.add(left);
-                n.left = left;
-            }
 
-            int rightVal = getValue(parts[++i]);
-            if (rightVal != Integer.MIN_VALUE) {
-                Node right = new Node(rightVal);
+            if (right != null)
                 q.add(right);
-                n.right = right;
-            }
-
-            i++;
         }
 
         return root;
     }
+
     // UTILS Methods
     private static Node createTree() {
         Node root = new Node(1);
@@ -93,8 +91,12 @@ public class Main {
         return  root;
     }
 
+    private static Node createNode(String s) {
+        return s.equals("#")? null : new Node(getValue(s));
+    }
+
     private static int getValue(String s) {
-        return !s.equals("#")? Integer.parseInt(s) : Integer.MIN_VALUE;
+        return Integer.parseInt(s);
     }
 
     public static class Node {
