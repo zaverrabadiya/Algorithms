@@ -7,16 +7,18 @@ public class Main {
         // e.g.
         // Input = {2, 4, 8}, 6 => true
         // Input = { 2, -4, 8 }, 1 => false
+        // Input = { 2, -4, 8 }, 6 => false
         // Input = {2, 4, 8}, 2 => true
+        // Input = {2, 4, 8}, 0 => false
 
-        int[] input = {2, 4, 8};
+        int[] input = {2, -4, 8};
 
-        System.out.print("Result: " + isSumK(input, 14));
+        System.out.print("Result: " + isSumK(input, 6));
     }
 
     public static boolean isSumK(int[] inArray, int k) {
 
-        return isSumK(inArray, 0, k);
+        return isSumK(inArray, 1, k - inArray[0]);
     }
 
     private static boolean isSumK(int[] arr, int s, int sum) {
