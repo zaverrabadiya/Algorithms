@@ -89,14 +89,16 @@ public class Main {
     }
 
     private static void sum(int[] a, int i, List<Integer> parts, int max, Set<Integer> result) {
-        final List<Integer> permutes = permute(parts);
-        boolean hasValidSum = permutes.stream().anyMatch( r -> r <= max);
+        final List<Integer> permutes = permute(parts)
+                                            .stream()
+                                            .filter(f -> f <= max)
+                                            .collect(toList());
 
-        if (i == a.length || permutes.size() > 0 && !hasValidSum) {
+        if (i == a.length || parts.size() > 0 && permutes.size() == 0) {
             return;
         }
 
-        result.addAll(permutes.stream().filter(f -> f <= max).collect(toList()));
+        result.addAll(permutes);
 
         sum(a, i + 1, parts, max, result);
         parts.add(a[i]);
