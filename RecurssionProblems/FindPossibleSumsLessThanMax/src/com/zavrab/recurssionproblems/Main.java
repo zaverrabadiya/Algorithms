@@ -1,7 +1,12 @@
 package com.zavrab.recurssionproblems;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+
+import static java.util.stream.Collectors.toList;
 
 /**
  *  Given array of integers and and max number, find numbers from array whose sum is less than max number.
@@ -16,11 +21,15 @@ public class Main {
         int[] a = new int[]{3, 7, 8};
         int max = 1000;
 
-        List<Integer> result = getPossibleCombination(a, max);
+        List<Integer> recursionResult = getPossibleCombination(a, max);
 
-        for (Integer r : result) {
-            System.out.println(r);
-        }
+        recursionResult.stream().sorted().forEach(i -> System.out.print(i + ", "));
+
+        System.out.println();
+
+        Set<Integer> permutedResult = new HashSet<>();
+        sum(a, 0, new ArrayList<>(), max, permutedResult);
+        permutedResult.stream().sorted().forEach(i -> System.out.print(i + ", "));
     }
 
     public static List<Integer> getPossibleCombination(int[] a, int max) {
@@ -30,7 +39,8 @@ public class Main {
 
         List<Integer> result = new ArrayList<Integer>();
 
-        recHelper(a, 0, result, new ArrayList<Integer>(), max);
+        recHelper(a, 0, result, new ArrayList<>(), max);
+
 
         return result;
     }
@@ -76,5 +86,56 @@ public class Main {
         }
 
         return num;
+    }
+
+    private static void sum(int[] a, int i, List<Integer> parts, int max, Set<Integer> result) {
+        final List<Integer> permutes = permute(parts);
+        boolean hasValidSum = permutes.stream().anyMatch( r -> r <= max);
+
+        if (i == a.length || permutes.size() > 0 && !hasValidSum) {
+            return;
+        }
+
+        result.addAll(permutes.stream().filter(f -> f <= max).collect(toList()));
+
+        sum(a, i + 1, parts, max, result);
+        parts.add(a[i]);
+
+        sum(a, i, parts, max, result);
+
+        sum(a, i + 1, parts, max, result);
+        parts.remove(parts.size() - 1);
+    }
+
+    private static List<Integer> permute(List<Integer> sum) {
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = 0; i < sum.size(); i++) {
+            permute(sum, i, result);
+        }
+
+        return result;
+    }
+
+    private static void permute(List<Integer> sum, int i, List<Integer> result) {
+        if (i == sum.size()) {
+            return;
+        }
+
+        for (int j = i; j < sum.size(); j++) {
+            swap(sum, i, j, result);
+            permute(sum, i + 1, result);
+            swap(sum, i, j, result);
+        }
+    }
+
+    private static void swap(List<Integer> sum, int i, int j, List<Integer> result) {
+        int t = sum.get(i);
+        sum.set(i, sum.get(j));
+        sum.set(j, t);
+
+        int intSum = getSum(sum);
+
+        result.add(intSum);
     }
 }
