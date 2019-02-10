@@ -18,12 +18,11 @@ public class Main {
 
     public static boolean isSumK(int[] inArray, int k) {
 
-        return isSumK(inArray, 1, k - inArray[0]);
+        return isSumK(inArray, 0, k, false);
     }
 
-    private static boolean isSumK(int[] arr, int s, int sum) {
-
-        if (sum == 0) {
+    private static boolean isSumK(int[] arr, int s, int sum, boolean hasPicked) {
+        if (sum == 0 && hasPicked) {
             return true;
         }
 
@@ -31,7 +30,7 @@ public class Main {
             return false;
         }
 
-        return isSumK(arr, s + 1, sum)  // Skip the current-element
-                || isSumK(arr, s + 1, sum - arr[s]);  // Reduces the current-element from sum and picks next element in array
+        return isSumK(arr, s + 1, sum, hasPicked)  // Skip the current-element
+                || isSumK(arr, s + 1, sum - arr[s], true);  // Reduces the current-element from sum and picks next element in array
     }
 }
