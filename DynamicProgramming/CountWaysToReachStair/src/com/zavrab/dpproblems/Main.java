@@ -10,22 +10,22 @@ package com.zavrab.dpproblems;
 public class Main {
 
     public static void main(String[] args) {
-        int numOfStairs = 4;
+        int numOfStairs = 5;
         int climbUpto = 3;
         System.out.println("Total ways: " + numOfWaysToClimb(numOfStairs, climbUpto));
     }
 
     public static int numOfWaysToClimb(int numOfStairs, int jump) {
-        //return numOfWaysToClimbRec(numOfStairs + 1, jump);
-        return numOfWaysToClimbDp(numOfStairs + 1, jump);
+//        return numOfWaysToClimbRec(numOfStairs + 1, jump);
+        return numOfWaysToClimbDp(numOfStairs, jump);
     }
 
     //DP solution
     private static int numOfWaysToClimbDp(int stairs, int jump) {
-        int ways[] = new int[stairs + 1];
-        ways[1] = 1;
+        int[] ways = new int[stairs + 1];
+        ways[0] = 1;
 
-        for (int i = 2; i <= stairs; i++) {
+        for (int i = 1; i <= stairs; i++) {
 
             for (int j = 1; j <= jump && j <= i; j++) {
                 ways[i] += ways[i - j];
